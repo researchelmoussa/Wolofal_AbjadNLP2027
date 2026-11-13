@@ -1,0 +1,685 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Wolofal · AbjadNLP 2027</title>
+<meta name="description" content="Contributor portal for the Wolofal data collection and annotation of the AbjadNLP 2027 shared tasks.">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,650&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f6f3ec; --surface:#fffdf8; --surface-2:#efeadf; --ink:#1d2421; --muted:#5d6762;
+  --line:#ddd6c8; --brand:#0d5c46; --brand-ink:#ffffff; --brand-soft:#e2efe9;
+  --gold:#b8861b; --gold-soft:#f6ecd3; --danger:#a63a2b; --danger-soft:#f8e4e0;
+  --ok:#1f7a4d; --shadow:0 1px 2px rgba(20,30,25,.06),0 8px 24px rgba(20,30,25,.06);
+  --radius:14px;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#121614; --surface:#1a201d; --surface-2:#222a26; --ink:#e9ece9; --muted:#a3ada8;
+  --line:#2f3934; --brand:#4fbf95; --brand-ink:#0c1512; --brand-soft:#1d3a30;
+  --gold:#e0b44e; --gold-soft:#3a3120; --danger:#ef8a7a; --danger-soft:#3d221e; --ok:#6fd39f;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.25);
+}}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font:16px/1.6 Inter,system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+a{color:var(--brand)}
+h1,h2,h3{font-family:Fraunces,Georgia,serif;font-weight:650;line-height:1.2;margin:0 0 .5em;letter-spacing:-.01em}
+h1{font-size:clamp(1.9rem,4.5vw,2.9rem)}
+h2{font-size:clamp(1.35rem,2.6vw,1.7rem)}
+h3{font-size:1.1rem}
+p{margin:0 0 1em}
+.wrap{max-width:1080px;margin:0 auto;padding:0 16px}
+.narrow{max-width:780px}
+.hidden{display:none!important}
+
+/* top bar */
+.bar{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.bar .wrap{display:flex;align-items:center;gap:12px;height:60px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:600;text-decoration:none;color:var(--ink)}
+.mark{width:32px;height:32px;border-radius:9px;background:var(--brand);color:var(--brand-ink);display:grid;place-items:center;font-family:Fraunces,serif;font-size:19px}
+.bar .spacer{flex:1}
+.who{color:var(--muted);font-size:.9rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:40vw}
+
+/* buttons & inputs */
+.btn{appearance:none;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:10px;padding:.55em 1em;font:inherit;font-weight:500;cursor:pointer;display:inline-flex;align-items:center;gap:.4em;text-decoration:none;white-space:nowrap}
+.btn:hover{border-color:var(--muted)}
+.btn.primary{background:var(--brand);border-color:var(--brand);color:var(--brand-ink)}
+.btn.primary:hover{filter:brightness(1.07)}
+.btn.danger{color:var(--danger)}
+.btn.sm{padding:.3em .65em;font-size:.85rem;border-radius:8px}
+.btn:disabled{opacity:.55;cursor:default}
+label{display:block;font-size:.88rem;font-weight:500;margin:0 0 .3em}
+input,textarea,select{width:100%;font:inherit;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:.6em .75em}
+input:focus,textarea:focus,select:focus{outline:2px solid color-mix(in srgb,var(--brand) 45%,transparent);border-color:var(--brand)}
+textarea{min-height:140px;resize:vertical;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.88rem}
+.field{margin-bottom:14px}
+.hint{color:var(--muted);font-size:.85rem}
+.msg{border-radius:10px;padding:.6em .8em;font-size:.92rem;margin-bottom:14px}
+.msg.err{background:var(--danger-soft);color:var(--danger)}
+.msg.ok{background:var(--brand-soft);color:var(--ok)}
+
+/* login */
+.login{min-height:calc(100vh - 60px);display:grid;place-items:center;padding:40px 16px}
+.login-card{width:100%;max-width:440px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:28px}
+.login-card .eyebrow{color:var(--gold);font-weight:600;font-size:.8rem;letter-spacing:.08em;text-transform:uppercase}
+.tabs{display:grid;grid-template-columns:1fr 1fr;background:var(--surface-2);border-radius:10px;padding:4px;margin:18px 0 20px}
+.tabs button{border:0;background:transparent;font:inherit;font-weight:500;color:var(--muted);padding:.5em;border-radius:8px;cursor:pointer}
+.tabs button.on{background:var(--surface);color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.08)}
+
+/* student page */
+.hero{padding:56px 0 28px}
+.hero .eyebrow{display:inline-block;background:var(--gold-soft);color:var(--gold);font-weight:600;font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;padding:.3em .7em;border-radius:99px;margin-bottom:14px}
+.hero .lead{font-size:1.12rem;color:var(--muted);max-width:680px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.chip{background:var(--surface);border:1px solid var(--line);border-radius:99px;padding:.3em .8em;font-size:.88rem}
+.sec{padding:30px 0;border-top:1px solid var(--line)}
+.sec .num{font-family:Fraunces,serif;color:var(--gold);font-size:.95rem;font-weight:650;margin-bottom:6px}
+.grid{display:grid;gap:14px}
+.grid.cols-2{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.grid.cols-3{grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:18px}
+.card h3{margin-bottom:.35em}
+.card p:last-child{margin-bottom:0}
+.tag{display:inline-block;font-size:.75rem;font-weight:600;letter-spacing:.04em;color:var(--brand);background:var(--brand-soft);border-radius:6px;padding:.15em .5em;margin-bottom:8px}
+.task-card{position:relative}
+.task-card.mine{border-color:var(--brand);box-shadow:0 0 0 1px var(--brand)}
+.task-card .mine-badge{position:absolute;top:14px;right:14px;font-size:.72rem;font-weight:600;background:var(--brand);color:var(--brand-ink);border-radius:99px;padding:.15em .6em}
+.impact li{margin-bottom:.45em}
+.thanks{background:linear-gradient(135deg,var(--brand-soft),var(--gold-soft));border:1px solid var(--line);border-radius:18px;padding:28px}
+.links{display:grid;gap:8px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.links a{display:block;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:.65em .85em;text-decoration:none;color:var(--ink);font-size:.93rem}
+.links a:hover{border-color:var(--brand)}
+.links a span{display:block;color:var(--muted);font-size:.8rem}
+footer{color:var(--muted);font-size:.85rem;padding:30px 0 50px;border-top:1px solid var(--line)}
+
+/* admin */
+.admin-head{display:flex;flex-wrap:wrap;align-items:flex-end;gap:12px;justify-content:space-between;padding:32px 0 18px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:18px}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.stat b{display:block;font-family:Fraunces,serif;font-size:1.7rem;line-height:1.1}
+.stat span{color:var(--muted);font-size:.85rem}
+.toolbar{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.toolbar input{flex:1 1 220px;width:auto}
+.table-wrap{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:.92rem}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:middle}
+th{font-size:.78rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);font-weight:600;background:var(--surface-2);white-space:nowrap}
+tr:last-child td{border-bottom:0}
+td .sub{color:var(--muted);font-size:.82rem}
+td .note{color:var(--gold);max-width:260px}
+td.langs{font-size:.86rem;min-width:190px}
+code.k{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;background:var(--surface-2);border-radius:6px;padding:.15em .45em;font-size:.88rem;white-space:nowrap}
+.pill{display:inline-block;font-size:.75rem;font-weight:600;border-radius:99px;padding:.1em .55em;margin:1px}
+.pill.t{background:var(--brand-soft);color:var(--brand)}
+.pill.on{background:var(--brand-soft);color:var(--ok)}
+.pill.off{background:var(--danger-soft);color:var(--danger)}
+.actions{display:flex;gap:6px;flex-wrap:wrap}
+.empty{padding:40px 16px;text-align:center;color:var(--muted)}
+
+/* dialogs */
+dialog{border:1px solid var(--line);border-radius:var(--radius);background:var(--surface);color:var(--ink);padding:0;width:min(560px,calc(100vw - 32px));box-shadow:var(--shadow)}
+dialog::backdrop{background:rgba(10,15,12,.45)}
+dialog form{padding:22px}
+dialog .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:560px){dialog .row{grid-template-columns:1fr}}
+.checks{display:flex;flex-wrap:wrap;gap:14px}
+.checks label{display:flex;align-items:center;gap:6px;font-weight:400;margin:0}
+.checks input{width:auto}
+.dlg-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:8px;flex-wrap:wrap}
+pre.invite{white-space:pre-wrap;background:var(--surface-2);border-radius:10px;padding:12px;font-size:.88rem;max-height:320px;overflow:auto;margin:0 0 12px}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:.6em 1.1em;border-radius:10px;font-size:.92rem;z-index:50;opacity:0;transition:opacity .2s;pointer-events:none}
+.toast.show{opacity:1}
+.loading{padding:80px 16px;text-align:center;color:var(--muted)}
+</style>
+</head>
+<body>
+
+<header class="bar">
+  <div class="wrap">
+    <a class="brand" href="#/"><span class="mark" style="font-family:'Noto Naskh Arabic','Geeza Pro',serif">و</span><span>Wolofal · AbjadNLP 2027</span></a>
+    <span class="spacer"></span>
+    <span class="who" id="who"></span>
+    <button class="btn sm hidden" id="logoutBtn" type="button">Sign out</button>
+  </div>
+</header>
+
+<main id="app"><div class="loading">Loading…</div></main>
+
+<!-- ───────── Login ───────── -->
+<template id="tpl-login">
+  <section class="login">
+    <div class="login-card">
+      <div class="eyebrow">Data collection &amp; annotation</div>
+      <h1 style="font-size:1.75rem;margin-top:.3em">Wolofal contributor portal</h1>
+      <p class="hint" style="margin:0">AbjadNLP 2027 shared tasks · co-located with COLING 2027</p>
+      <div class="tabs" role="tablist">
+        <button type="button" data-tab="student" class="on" role="tab">Student</button>
+        <button type="button" data-tab="admin" role="tab">Admin</button>
+      </div>
+      <div id="loginMsg"></div>
+      <form id="studentForm" autocomplete="on">
+        <div class="field"><label for="sEmail">Email address</label>
+          <input id="sEmail" type="email" required autocomplete="email" placeholder="you@university.edu"></div>
+        <div class="field"><label for="sCode">Identification code</label>
+          <input id="sCode" required autocomplete="off" placeholder="WOL-XXXX-XXXX" style="text-transform:uppercase;letter-spacing:.05em"></div>
+        <button class="btn primary" style="width:100%;justify-content:center" type="submit">Sign in</button>
+        <p class="hint" style="margin:14px 0 0">Your identification code was sent to you by the AbjadNLP Wolofal coordinator. Lost it? Write to <a href="mailto:research@elmoussa.ch">research@elmoussa.ch</a>.</p>
+      </form>
+      <form id="adminForm" class="hidden" autocomplete="on">
+        <div class="field"><label for="aEmail">Admin email</label>
+          <input id="aEmail" type="email" required autocomplete="username"></div>
+        <div class="field"><label for="aPass">Password</label>
+          <input id="aPass" type="password" required autocomplete="current-password"></div>
+        <button class="btn primary" style="width:100%;justify-content:center" type="submit">Sign in as admin</button>
+      </form>
+    </div>
+  </section>
+</template>
+
+<!-- ───────── Student presentation ───────── -->
+<template id="tpl-student">
+  <section class="hero">
+    <div class="wrap narrow">
+      <span class="eyebrow">AbjadNLP 2027 · Wolofal</span>
+      <h1>Welcome, <span data-bind="firstName"></span>.</h1>
+      <p class="lead">Thank you for joining the data collection and annotation team that brings Wolofal into the AbjadNLP 2027 shared tasks. This page explains the workshop, why Wolofal matters, and exactly what we are asking of you.</p>
+      <div class="chips">
+        <span class="chip">📍 Macao, China</span>
+        <span class="chip">📅 9–14 May 2027</span>
+        <span class="chip">🤝 Co-located with COLING 2027</span>
+        <span class="chip">✍️ 3rd edition</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap narrow">
+    <!-- 1 -->
+    <section class="sec">
+      <div class="num">01 · The workshop</div>
+      <h2>What is AbjadNLP 2027?</h2>
+      <p><strong>AbjadNLP 2027</strong> is the 3rd Workshop on Natural Language Processing for Languages Using Arabic Script, held with <strong>COLING 2027</strong>, the International Conference on Computational Linguistics, in Macao, China (9–14 May 2027). <em>Abjad</em> is the family of writing systems shared by Arabic, Persian, Urdu, Kurdish, Pashto and the African <em>Ajami</em> traditions. Hundreds of millions of people write in it, yet most of these languages still lack the datasets and tools that English takes for granted.</p>
+      <p>The workshop brings together researchers and engineers who build language technology for these languages. Alongside the paper track it runs <strong>nine shared tasks</strong>: open competitions in which teams around the world build systems on the same datasets and are evaluated with the same metrics.</p>
+      <div class="links">
+        <a href="https://abjadnlp.com/abjad2027.html" target="_blank" rel="noopener">AbjadNLP 2027 website<span>abjadnlp.com/abjad2027.html</span></a>
+        <a href="https://abjadnlp.com/abjad2027.html#tasks" target="_blank" rel="noopener">All nine shared tasks<span>abjadnlp.com/abjad2027.html#tasks</span></a>
+      </div>
+    </section>
+
+    <!-- 2 -->
+    <section class="sec">
+      <div class="num">02 · A first</div>
+      <h2>Wolofal: the first Senegambian language at AbjadNLP</h2>
+      <p>This year, for the first time, AbjadNLP includes a <strong>Senegambian language: Wolofal</strong>, which is Wolof written in Arabic script. Wolof is spoken by millions of people in Senegal and The Gambia. For centuries Wolofal has carried religious poetry, letters, chronicles and everyday writing, and it is one of the richest <em>Ajami</em> traditions of West Africa. Wolofal is part of five of the 2027 shared tasks:</p>
+      <div class="grid cols-2">
+        <div class="card"><span class="tag">Shared Task 01</span><h3>AbjadGenEval</h3><p>Tell <strong>human-written</strong> texts apart from <strong>AI-generated</strong> ones, so that machine-produced content can be spotted in Arabic-script languages.</p><a href="https://abjadnlp.com/abjad2027/AbjadGenEval.html" target="_blank" rel="noopener">Task page →</a></div>
+        <div class="card"><span class="tag">Shared Task 03</span><h3>AbjadAuthorID</h3><p>Identify <strong>who wrote a text</strong> from its style, across several candidate authors.</p><a href="https://abjadnlp.com/abjad2027/AbjadAuthorID.html" target="_blank" rel="noopener">Task page →</a></div>
+        <div class="card"><span class="tag">Shared Task 05</span><h3>AbjadSentEval</h3><p>Detect the <strong>sentiment</strong> of a text (positive, negative or neutral) in Arabic dialects and in Wolofal.</p><a href="https://abjadnlp.com/abjad2027/AbjadSentEval.html" target="_blank" rel="noopener">Task page →</a></div>
+        <div class="card"><span class="tag">Shared Task 07</span><h3>Abjad Translation</h3><p><strong>Translate</strong> while keeping the meaning and sounding natural. The task covers Arabic cross-dialect translation and a Wolofal translation track.</p><a href="https://abjadnlp.com/abjad2027/AbjadTranslation.html" target="_blank" rel="noopener">Task page →</a></div>
+        <div class="card"><span class="tag">Shared Task 08</span><h3>AbjadLanguageID</h3><p>Recognise <strong>which language</strong>, and which language cluster, an Arabic-script text is written in. Wolofal sits next to Arabic, Persian, Urdu, Kurdish and Ajami.</p><a href="https://abjadnlp.com/abjad2027/AbjadLanguageID.html" target="_blank" rel="noopener">Task page →</a></div>
+      </div>
+    </section>
+
+    <!-- 3 -->
+    <section class="sec">
+      <div class="num">03 · Why it matters</div>
+      <h2>Ending the isolation of Senegambian languages</h2>
+      <p>Senegambian languages have mostly been left out of NLP research. Few datasets exist, almost no benchmarks exist, and Wolofal in particular is close to invisible to modern AI. Bringing Wolofal into an international shared task changes that:</p>
+      <ul class="impact">
+        <li><strong>A first public benchmark.</strong> Teams from around the world will build and evaluate systems on Wolofal data. The language moves from absent to measured and compared.</li>
+        <li><strong>A shared research space.</strong> Wolofal is studied next to Arabic, Persian, Urdu and Kurdish, so methods, tools and researchers can move between these languages.</li>
+        <li><strong>Sentiment analysis</strong> makes it possible to understand opinions, feedback and social-media conversations written by Wolof speakers.</li>
+        <li><strong>AI-generated text detection</strong> protects the authenticity of Wolofal content as generative AI spreads.</li>
+        <li><strong>Authorship identification</strong> helps attribute manuscripts and poems, which supports digital humanities and the preservation of Ajami heritage.</li>
+        <li><strong>Language identification and translation</strong> are the entry points of every NLP pipeline. They open the way to collecting more data and to giving Wolof speakers access to information in education, health and administration.</li>
+      </ul>
+      <p>In short, your work helps make Wolofal visible to language technology. The data you produce will outlast this competition.</p>
+    </section>
+
+    <!-- 4 -->
+    <section class="sec">
+      <div class="num">04 · Your contribution</div>
+      <h2>What we are asking you to do</h2>
+      <p>The contribution is split into three tasks. <span data-bind="taskIntro"></span></p>
+      <div class="grid cols-3" id="taskCards">
+        <div class="card task-card" data-task="T0"><span class="tag">Task 0</span><h3>Verify</h3><p>Check the <strong>veracity of the Wolofal data</strong> collected during corpus collection. Is the text really Wolof? Is it written correctly in Wolofal? Are the source and metadata right? Flag errors, duplicates and doubtful items.</p></div>
+        <div class="card task-card" data-task="T1"><span class="tag">Task 1</span><h3>Augment</h3><p><strong>Augment the corpus</strong> with new, authentic Wolofal texts, together with their sources, so the datasets are larger and more diverse in genre, topic and author.</p></div>
+        <div class="card task-card" data-task="T2"><span class="tag">Task 2</span><h3>Annotate</h3><p><strong>Annotate the translations into Wolofal</strong>: check that each translation is faithful to the original, reads naturally to a Wolof speaker and follows Wolofal orthography. Correct it where needed.</p></div>
+      </div>
+      <p class="hint" style="margin-top:14px">Detailed guidelines and access to the data will be shared with you by the coordinator. For any question, write to <a href="mailto:research@elmoussa.ch">research@elmoussa.ch</a>.</p>
+    </section>
+
+    <!-- 5 -->
+    <section class="sec">
+      <div class="thanks">
+        <div class="num">05 · Thank you</div>
+        <h2>Thank you, and welcome to research</h2>
+        <p>We want first to <strong>thank you</strong> for your contribution. It opens the door for you to become a <strong>co-author of a resource paper</strong> on this shared task, to be presented with <strong>COLING</strong>, a conference recognised worldwide in Natural Language Processing.</p>
+        <p>The resource paper will be cited by every participating team in their system papers, and in the shared-task overview paper. That will <strong>significantly increase the number of citations</strong> of your work. Why not hope for 100 citations on your first research paper? 🙂 What luck that would be!</p>
+        <p style="margin:0">This experience can open doors for you: to a career in research, and to respected positions in industry.</p>
+      </div>
+    </section>
+  </div>
+
+  <footer><div class="wrap narrow">Wolofal · AbjadNLP 2027 contributor portal · Signed in as <span data-bind="email"></span></div></footer>
+</template>
+
+<!-- ───────── Admin ───────── -->
+<template id="tpl-admin">
+  <div class="wrap">
+    <div class="admin-head">
+      <div>
+        <h1 style="font-size:1.9rem;margin:0">Contributors</h1>
+        <p class="hint" style="margin:0">Manage student emails and identification codes.</p>
+      </div>
+      <div class="toolbar" style="margin:0">
+        <button class="btn" type="button" id="pwBtn">Change password</button>
+        <button class="btn" type="button" id="csvBtn">Export CSV</button>
+        <button class="btn" type="button" id="bulkBtn">Bulk import</button>
+        <button class="btn primary" type="button" id="addBtn">+ Add student</button>
+      </div>
+    </div>
+    <div class="stats" id="stats"></div>
+    <div class="toolbar"><input id="search" type="search" placeholder="Search name, email, institution or code…"></div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Student</th><th>Languages</th><th>Identification code</th><th>Tasks</th><th>Status</th><th>Last sign-in</th><th></th></tr></thead>
+        <tbody id="rows"></tbody>
+      </table>
+      <div class="empty hidden" id="emptyRows">No students yet. Add them one by one or use <b>Bulk import</b>.</div>
+    </div>
+    <p class="hint" style="margin:14px 0 40px">Portal link to share with students: <code class="k" id="portalUrl"></code></p>
+  </div>
+</template>
+
+<dialog id="dlgStudent">
+  <form method="dialog" id="studentEdit">
+    <h2 id="dlgStudentTitle">Add student</h2>
+    <div id="dlgStudentMsg"></div>
+    <div class="row">
+      <div class="field"><label for="fName">Full name</label><input id="fName"></div>
+      <div class="field"><label for="fEmail">Email *</label><input id="fEmail" type="email" required></div>
+    </div>
+    <div class="field"><label for="fInst">Institution</label><input id="fInst"></div>
+    <div class="field"><label>Assigned tasks</label>
+      <div class="checks">
+        <label><input type="checkbox" name="task" value="T0" checked> Task 0 · Verify</label>
+        <label><input type="checkbox" name="task" value="T1" checked> Task 1 · Augment</label>
+        <label><input type="checkbox" name="task" value="T2" checked> Task 2 · Annotate</label>
+      </div></div>
+    <div class="row" id="profileFields"></div>
+    <div class="field"><label for="fNotes">Notes (admin only)</label><input id="fNotes"></div>
+    <div class="field" id="fActiveWrap"><div class="checks"><label><input type="checkbox" id="fActive" checked> Account active (can sign in)</label></div></div>
+    <div class="dlg-actions">
+      <button class="btn" value="cancel" formnovalidate>Cancel</button>
+      <button class="btn primary" id="studentSave" value="save">Save</button>
+    </div>
+  </form>
+</dialog>
+
+<dialog id="dlgBulk">
+  <form method="dialog" id="bulkForm">
+    <h2>Bulk import</h2>
+    <p class="hint">One student per line: <code class="k">email, full name, institution</code>. Name and institution are optional. A code is generated for each new email, and emails that already exist are skipped. All three tasks are assigned by default.</p>
+    <div id="bulkMsg"></div>
+    <div class="field"><textarea id="bulkText" placeholder="awa.diop@ucad.edu.sn, Awa Diop, UCAD&#10;moussa.fall@example.com, Moussa Fall"></textarea></div>
+    <div class="dlg-actions">
+      <button class="btn" value="cancel" formnovalidate>Close</button>
+      <button class="btn primary" id="bulkSave" value="save">Import</button>
+    </div>
+  </form>
+</dialog>
+
+<dialog id="dlgInvite">
+  <form method="dialog">
+    <h2>Invitation for <span id="invName"></span></h2>
+    <pre class="invite" id="invText"></pre>
+    <div class="dlg-actions">
+      <button class="btn" value="close">Close</button>
+      <a class="btn" id="invMail" href="#">Open in email app</a>
+      <button class="btn primary" type="button" id="invCopy">Copy text</button>
+    </div>
+  </form>
+</dialog>
+
+<dialog id="dlgPw">
+  <form method="dialog" id="pwForm">
+    <h2>Change admin password</h2>
+    <div id="pwMsg"></div>
+    <div class="field"><label for="pwOld">Current password</label><input id="pwOld" type="password" required autocomplete="current-password"></div>
+    <div class="field"><label for="pwNew">New password (10+ characters)</label><input id="pwNew" type="password" required minlength="10" autocomplete="new-password"></div>
+    <div class="dlg-actions">
+      <button class="btn" value="cancel" formnovalidate>Cancel</button>
+      <button class="btn primary" id="pwSave" value="save">Update password</button>
+    </div>
+  </form>
+</dialog>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const SUPABASE_URL = 'https://eknkdmesinkldvixqocz.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_YU0tp2M6gKQz9TKIEQPcEw_87SRrurJ';
+const TASK_NAMES = {T0:'Task 0 · Verify', T1:'Task 1 · Augment', T2:'Task 2 · Annotate'};
+
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+const app = $('#app');
+const store = {
+  get(k){ try { return localStorage.getItem(k); } catch { return null; } },
+  set(k, v){ try { localStorage.setItem(k, v); } catch {} },
+  del(k){ try { localStorage.removeItem(k); } catch {} }
+};
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const portalUrl = () => location.origin + location.pathname;
+
+function toast(t){ const el = $('#toast'); el.textContent = t; el.classList.add('show'); clearTimeout(toast.t); toast.t = setTimeout(() => el.classList.remove('show'), 2200); }
+function showMsg(el, kind, text){ el.innerHTML = text ? `<div class="msg ${kind}">${esc(text)}</div>` : ''; }
+
+async function rpc(fn, args){
+  const r = await fetch(`${SUPABASE_URL}/rest/v1/rpc/${fn}`, {
+    method:'POST', headers:{apikey:SUPABASE_KEY, 'Content-Type':'application/json'}, body:JSON.stringify(args || {})
+  });
+  const txt = await r.text();
+  let data = null; try { data = txt ? JSON.parse(txt) : null; } catch {}
+  if (!r.ok) {
+    const m = (data && data.message) || `Request failed (${r.status})`;
+    const err = new Error(m === 'too_many_attempts' ? 'Too many failed attempts. Please wait 15 minutes and try again.'
+      : m === 'not_authorized' ? 'Your admin session has expired. Please sign in again.' : m);
+    err.code = m; throw err;
+  }
+  return data;
+}
+
+function setBar(text, showLogout){ $('#who').textContent = text || ''; $('#logoutBtn').classList.toggle('hidden', !showLogout); }
+
+/* ── router ── */
+async function route(){
+  const h = location.hash || '#/';
+  if (h.startsWith('#/admin')) return renderAdmin();
+  if (h.startsWith('#/welcome')) return renderStudent();
+  return renderLogin();
+}
+window.addEventListener('hashchange', route);
+$('#logoutBtn').addEventListener('click', async () => {
+  const t = store.get('wol_admin') || store.get('wol_student');
+  store.del('wol_admin'); store.del('wol_student');
+  if (t) rpc('abjad_logout', {p_token:t}).catch(() => {});
+  location.hash = '#/'; route();
+});
+
+/* ── login ── */
+async function renderLogin(){
+  // already signed in? go straight to the right page
+  const st = store.get('wol_student'), ad = store.get('wol_admin');
+  if (ad) { location.hash = '#/admin'; return; }
+  if (st) { location.hash = '#/welcome'; return; }
+  setBar('', false);
+  app.replaceChildren($('#tpl-login').content.cloneNode(true));
+  const msg = $('#loginMsg');
+  $$('.tabs button').forEach(b => b.addEventListener('click', () => {
+    $$('.tabs button').forEach(x => x.classList.toggle('on', x === b));
+    $('#studentForm').classList.toggle('hidden', b.dataset.tab !== 'student');
+    $('#adminForm').classList.toggle('hidden', b.dataset.tab !== 'admin');
+    showMsg(msg);
+  }));
+  $('#studentForm').addEventListener('submit', async e => {
+    e.preventDefault(); const btn = e.submitter; btn.disabled = true; showMsg(msg);
+    try {
+      const r = await rpc('abjad_student_login', {p_email:$('#sEmail').value, p_code:$('#sCode').value});
+      if (!r.ok) return showMsg(msg, 'err', 'Email or identification code not recognised. Check both and try again.');
+      store.set('wol_student', r.token); location.hash = '#/welcome';
+    } catch (err) { showMsg(msg, 'err', err.message); } finally { btn.disabled = false; }
+  });
+  $('#adminForm').addEventListener('submit', async e => {
+    e.preventDefault(); const btn = e.submitter; btn.disabled = true; showMsg(msg);
+    try {
+      const r = await rpc('abjad_admin_login', {p_email:$('#aEmail').value, p_password:$('#aPass').value});
+      if (!r.ok) return showMsg(msg, 'err', 'Wrong email or password.');
+      store.set('wol_admin', r.token); location.hash = '#/admin';
+    } catch (err) { showMsg(msg, 'err', err.message); } finally { btn.disabled = false; }
+  });
+}
+
+/* ── student page ── */
+async function renderStudent(){
+  const token = store.get('wol_student');
+  if (!token) { location.hash = '#/'; return; }
+  app.innerHTML = '<div class="loading">Loading…</div>';
+  let me;
+  try { me = await rpc('abjad_student_me', {p_token:token}); }
+  catch (e) { app.innerHTML = `<div class="loading">Could not reach the server. ${esc(e.message)}</div>`; return; }
+  if (!me) { store.del('wol_student'); location.hash = '#/'; return; }
+  setBar(me.full_name || me.email, true);
+  app.replaceChildren($('#tpl-student').content.cloneNode(true));
+  const first = (me.full_name || '').trim().split(/\s+/)[0] || 'contributor';
+  $('[data-bind="firstName"]').textContent = first;
+  $('[data-bind="email"]').textContent = me.email;
+  const mine = me.tasks || [];
+  $$('.task-card').forEach(c => {
+    if (mine.includes(c.dataset.task)) { c.classList.add('mine'); c.insertAdjacentHTML('afterbegin', '<span class="mine-badge">Assigned to you</span>'); }
+  });
+  $('[data-bind="taskIntro"]').textContent = mine.length === 3 ? 'You are assigned to all three.'
+    : mine.length ? `You are assigned to ${mine.map(t => TASK_NAMES[t]).join(' and ')}. ${mine.length > 1 ? 'They are' : 'It is'} highlighted below.`
+    : 'Your coordinator will tell you which tasks you are assigned to.';
+  window.scrollTo(0, 0);
+}
+
+/* ── admin ── */
+let students = [];
+async function renderAdmin(){
+  const token = store.get('wol_admin');
+  if (!token) { location.hash = '#/'; return; }
+  app.innerHTML = '<div class="loading">Loading…</div>';
+  let me;
+  try { me = await rpc('abjad_admin_me', {p_token:token}); }
+  catch (e) { app.innerHTML = `<div class="loading">Could not reach the server. ${esc(e.message)}</div>`; return; }
+  if (!me) { store.del('wol_admin'); location.hash = '#/'; return; }
+  setBar(me.email + ' · admin', true);
+  app.replaceChildren($('#tpl-admin').content.cloneNode(true));
+  $('#portalUrl').textContent = portalUrl();
+  $('#search').addEventListener('input', drawRows);
+  $('#addBtn').addEventListener('click', () => openStudent(null));
+  $('#bulkBtn').addEventListener('click', () => { $('#bulkText').value = ''; showMsg($('#bulkMsg')); $('#dlgBulk').showModal(); });
+  $('#csvBtn').addEventListener('click', exportCsv);
+  $('#pwBtn').addEventListener('click', () => { $('#pwForm').reset(); showMsg($('#pwMsg')); $('#dlgPw').showModal(); });
+  $('#rows').addEventListener('click', onRowClick);
+  await loadStudents();
+}
+async function adminCall(fn, args){
+  try { return await rpc(fn, {p_token:store.get('wol_admin'), ...args}); }
+  catch (e) { if (e.code === 'not_authorized') { store.del('wol_admin'); location.hash = '#/'; } throw e; }
+}
+async function loadStudents(){
+  try { students = await adminCall('abjad_admin_list_students', {}) || []; }
+  catch (e) { toast(e.message); return; }
+  drawStats(); drawRows();
+}
+function drawStats(){
+  const active = students.filter(s => s.active).length;
+  const signed = students.filter(s => s.last_login_at).length;
+  $('#stats').innerHTML = [
+    [students.length, 'Students'], [active, 'Active accounts'], [signed, 'Have signed in'], [students.length - signed, 'Not signed in yet']
+  ].map(([n, l]) => `<div class="stat"><b>${n}</b><span>${l}</span></div>`).join('');
+}
+const PROFILE_FIELDS = [
+  ['local_languages','Local languages'], ['local_level','Level (local)'],
+  ['arabic_script','Arabic-script writing'], ['arabic_script_level','Level (Arabic script)'],
+  ['foreign_languages','Foreign languages'], ['foreign_level','Level (foreign)'],
+  ['task_choice','Task choice (registration sheet)']
+];
+function profileCell(p){
+  const line = (lang, lvl) => lang ? `${esc(lang)}${lvl ? ` <span class="sub">· ${esc(lvl)}</span>` : ''}` : '';
+  const parts = [
+    line(p.local_languages, p.local_level),
+    p.arabic_script ? `<b>${esc(p.arabic_script)}</b>${p.arabic_script_level ? ` <span class="sub">· ${esc(p.arabic_script_level)}</span>` : ''}` : '',
+    line(p.foreign_languages, p.foreign_level)
+  ].filter(Boolean);
+  if (p.task_choice) parts.push(`<span class="sub">Chose: ${esc(p.task_choice)}</span>`);
+  return parts.length ? parts.map(x => `<div>${x}</div>`).join('') : '<span class="sub">—</span>';
+}
+const fmtDate = d => d ? new Date(d).toLocaleString(undefined, {dateStyle:'medium', timeStyle:'short'}) : '—';
+function drawRows(){
+  const q = ($('#search').value || '').toLowerCase().trim();
+  const list = students.filter(s => !q || [s.full_name, s.email, s.institution, s.code, s.notes, ...Object.values(s.profile || {})].join(' ').toLowerCase().includes(q));
+  $('#emptyRows').classList.toggle('hidden', students.length > 0);
+  $('#rows').innerHTML = list.map(s => `
+    <tr data-id="${esc(s.id)}">
+      <td><b>${esc(s.full_name || '—')}</b><div class="sub">${esc(s.email)}</div>${s.institution ? `<div class="sub">${esc(s.institution)}</div>` : ''}${s.notes ? `<div class="sub note">⚠ ${esc(s.notes)}</div>` : ''}</td>
+      <td class="langs">${profileCell(s.profile || {})}</td>
+      <td><code class="k">${esc(s.code)}</code></td>
+      <td>${(s.tasks || []).map(t => `<span class="pill t">${esc(t)}</span>`).join('') || '<span class="sub">none</span>'}</td>
+      <td>${s.active ? '<span class="pill on">Active</span>' : '<span class="pill off">Disabled</span>'}</td>
+      <td>${fmtDate(s.last_login_at)}<div class="sub">${s.login_count} sign-in${s.login_count === 1 ? '' : 's'}</div></td>
+      <td><div class="actions">
+        <button class="btn sm" data-act="invite" type="button">Invite</button>
+        <button class="btn sm" data-act="copy" type="button">Copy code</button>
+        <button class="btn sm" data-act="edit" type="button">Edit</button>
+        <button class="btn sm" data-act="regen" type="button">New code</button>
+        <button class="btn sm danger" data-act="del" type="button">Delete</button>
+      </div></td>
+    </tr>`).join('');
+}
+async function onRowClick(e){
+  const b = e.target.closest('button[data-act]'); if (!b) return;
+  const s = students.find(x => x.id === b.closest('tr').dataset.id); if (!s) return;
+  const act = b.dataset.act;
+  if (act === 'copy') return copy(s.code, 'Code copied');
+  if (act === 'invite') return openInvite(s);
+  if (act === 'edit') return openStudent(s);
+  if (act === 'regen') {
+    if (!confirm(`Generate a new code for ${s.email}? The old code stops working immediately.`)) return;
+    try { const u = await adminCall('abjad_admin_regenerate_code', {p_id:s.id}); Object.assign(s, u); drawRows(); toast('New code: ' + u.code); }
+    catch (err) { toast(err.message); }
+  }
+  if (act === 'del') {
+    if (!confirm(`Delete ${s.email}? This cannot be undone.`)) return;
+    try { await adminCall('abjad_admin_delete_student', {p_id:s.id}); students = students.filter(x => x !== s); drawStats(); drawRows(); toast('Student deleted'); }
+    catch (err) { toast(err.message); }
+  }
+}
+async function copy(text, label){
+  try { await navigator.clipboard.writeText(text); toast(label || 'Copied'); }
+  catch { prompt('Copy this:', text); }
+}
+
+/* add / edit dialog */
+let editing = null;
+function openStudent(s){
+  editing = s;
+  $('#dlgStudentTitle').textContent = s ? 'Edit student' : 'Add student';
+  showMsg($('#dlgStudentMsg'));
+  $('#fName').value = s?.full_name || ''; $('#fEmail').value = s?.email || '';
+  $('#fInst').value = s?.institution || ''; $('#fNotes').value = s?.notes || '';
+  $('#fActive').checked = s ? s.active : true;
+  $('#fActiveWrap').classList.toggle('hidden', !s);
+  const p = s?.profile || {};
+  $('#profileFields').innerHTML = PROFILE_FIELDS.map(([k, l]) =>
+    `<div class="field"><label for="p_${k}">${l}</label><input id="p_${k}" data-pk="${k}" value="${esc(p[k] || '')}"></div>`).join('');
+  const tasks = s ? s.tasks : ['T0','T1','T2'];
+  $$('#studentEdit input[name=task]').forEach(c => c.checked = tasks.includes(c.value));
+  $('#dlgStudent').showModal();
+}
+$('#studentEdit').addEventListener('submit', async e => {
+  if (e.submitter?.value !== 'save') return;
+  e.preventDefault();
+  const row = {
+    full_name:$('#fName').value, email:$('#fEmail').value, institution:$('#fInst').value, notes:$('#fNotes').value,
+    tasks:$$('#studentEdit input[name=task]:checked').map(c => c.value),
+    profile:Object.fromEntries($$('#profileFields input').map(i => [i.dataset.pk, i.value.trim()]))
+  };
+  const btn = $('#studentSave'); btn.disabled = true;
+  try {
+    if (editing) {
+      const u = await adminCall('abjad_admin_update_student', {p_id:editing.id, p_patch:{...row, active:$('#fActive').checked}});
+      Object.assign(editing, u); toast('Saved'); $('#dlgStudent').close();
+    } else {
+      const r = await adminCall('abjad_admin_add_students', {p_rows:[row]});
+      if (r.skipped.length) { showMsg($('#dlgStudentMsg'), 'err', `${r.skipped[0].email || 'Email'}: ${r.skipped[0].reason}`); return; }
+      students.unshift(...r.added); $('#dlgStudent').close(); openInvite(r.added[0]);
+    }
+    drawStats(); drawRows();
+  } catch (err) {
+    showMsg($('#dlgStudentMsg'), 'err', /duplicate key/.test(err.message) ? 'Another student already uses this email.' : err.message);
+  } finally { btn.disabled = false; }
+});
+
+/* bulk import */
+$('#bulkForm').addEventListener('submit', async e => {
+  if (e.submitter?.value !== 'save') return;
+  e.preventDefault();
+  const rows = $('#bulkText').value.split(/\r?\n/).map(l => l.trim()).filter(Boolean).map(l => {
+    const [email, full_name = '', institution = ''] = l.split(/[,;\t]/).map(x => x.trim());
+    return {email, full_name, institution};
+  });
+  if (!rows.length) return showMsg($('#bulkMsg'), 'err', 'Paste at least one line.');
+  const btn = $('#bulkSave'); btn.disabled = true;
+  try {
+    const r = await adminCall('abjad_admin_add_students', {p_rows:rows});
+    students.unshift(...r.added); drawStats(); drawRows();
+    const sk = r.skipped.map(s => `${s.email || '(blank)'}: ${s.reason}`).join('; ');
+    showMsg($('#bulkMsg'), r.added.length ? 'ok' : 'err', `${r.added.length} added.` + (sk ? ` Skipped: ${sk}.` : ''));
+    if (r.added.length) $('#bulkText').value = '';
+  } catch (err) { showMsg($('#bulkMsg'), 'err', err.message); }
+  finally { btn.disabled = false; }
+});
+
+/* invitation */
+function inviteText(s){
+  const name = (s.full_name || '').trim().split(/\s+/)[0] || '';
+  return `Dear ${name || 'contributor'},
+
+Thank you for joining the Wolofal data collection and annotation team for the AbjadNLP 2027 shared tasks (co-located with COLING 2027).
+
+Please sign in to the contributor portal to read the presentation of the project and of your tasks:
+
+Portal: ${portalUrl()}
+Email: ${s.email}
+Identification code: ${s.code}
+
+Keep this code personal; it is your access key.
+
+Best regards,
+AbjadNLP 2027 · Wolofal team`;
+}
+function openInvite(s){
+  const t = inviteText(s);
+  $('#invName').textContent = s.full_name || s.email;
+  $('#invText').textContent = t;
+  $('#invMail').href = `mailto:${encodeURIComponent(s.email)}?subject=${encodeURIComponent('AbjadNLP 2027 · Wolofal: your access to the contributor portal')}&body=${encodeURIComponent(t)}`;
+  $('#invCopy').onclick = () => copy(t, 'Invitation copied');
+  $('#dlgInvite').showModal();
+}
+
+/* CSV */
+function exportCsv(){
+  const cols = ['full_name','email','institution','code','tasks', ...PROFILE_FIELDS.map(f => f[0]), 'active','login_count','last_login_at','created_at','notes'];
+  const flat = s => ({...(s.profile || {}), ...s});
+  const cell = v => { v = Array.isArray(v) ? v.join(' ') : (v ?? ''); v = String(v); return /[",\n;]/.test(v) ? `"${v.replace(/"/g, '""')}"` : v; };
+  const csv = [cols.join(','), ...students.map(s => { const f = flat(s); return cols.map(c => cell(f[c])).join(','); })].join('\n');
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob(['﻿' + csv], {type:'text/csv'}));
+  a.download = `wolofal-abjadnlp2027-students-${new Date().toISOString().slice(0,10)}.csv`;
+  a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+}
+
+/* password */
+$('#pwForm').addEventListener('submit', async e => {
+  if (e.submitter?.value !== 'save') return;
+  e.preventDefault();
+  const btn = $('#pwSave'); btn.disabled = true;
+  try {
+    const r = await adminCall('abjad_admin_change_password', {p_old:$('#pwOld').value, p_new:$('#pwNew').value});
+    if (!r.ok) return showMsg($('#pwMsg'), 'err', r.reason);
+    $('#dlgPw').close(); toast('Password updated');
+  } catch (err) { showMsg($('#pwMsg'), 'err', err.message); }
+  finally { btn.disabled = false; }
+});
+
+route();
+</script>
+</body>
+</html>
