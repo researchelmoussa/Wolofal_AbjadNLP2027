@@ -13,6 +13,11 @@ Online portal for the Wolofal data collection and annotation of the
   code, disable or delete an account, copy a ready-made invitation (or open
   it in the email app), export everything as CSV, and change the admin
   password.
+- The whole portal is available in **English and French** (EN/FR switch in
+  the header; the choice is remembered). Invitations can be generated in
+  either language.
+- The look follows abjadnlp.com (colours, DM Sans / Noto Kufi Arabic, logo in
+  `assets/`).
 
 ## How it is built
 
