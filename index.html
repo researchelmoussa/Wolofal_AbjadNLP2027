@@ -150,18 +150,29 @@ tbody tr:hover{background:#fafcfb}
 tr:last-child td{border-bottom:0}
 td .sub{color:var(--muted);font-size:.8rem}
 td .note{color:var(--ruby);max-width:260px;font-size:.78rem;margin-top:4px}
-td.lc{min-width:130px}
+td.lc{min-width:120px}
 .lvl{display:inline-block;margin-top:3px;font-size:.7rem;font-weight:700;border-radius:6px;padding:.1em .45em;background:#eef3f2;color:#4e5e60}
 .lvl.adv{background:var(--teal-soft);color:var(--teal)}
 .lvl.mid{background:var(--gold-soft);color:#7a5a17}
 .lvl.beg{background:var(--ruby-soft);color:var(--ruby)}
+select.st{width:auto;min-width:104px;font-size:.78rem;font-weight:700;padding:.35em .5em;border-radius:9px;cursor:pointer}
+.st-incomplete{background:var(--ruby-soft);color:var(--ruby);border-color:#efd0d6}
+.st-ongoing{background:var(--gold-soft);color:#7a5a17;border-color:#ead5ae}
+.st-completed{background:var(--teal-soft);color:var(--teal);border-color:#c8dcd7}
+.task-card .mine-badge.sb-incomplete{background:var(--ruby)}
+.task-card .mine-badge.sb-ongoing{background:var(--gold);color:#183433}
+.task-card .mine-badge.sb-completed{background:var(--teal)}
 .ajami{font-weight:700;color:var(--deep)}
 code.k{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;background:var(--sand);border:1px solid #ecdfc4;color:var(--deep);border-radius:7px;padding:.2em .5em;font-size:.84rem;white-space:nowrap}
 .pill{display:inline-block;font-size:.7rem;font-weight:700;border-radius:99px;padding:.15em .6em;margin:1px}
 .pill.t{background:var(--teal-soft);color:var(--teal)}
 .pill.on{background:var(--teal-soft);color:var(--teal)}
 .pill.off{background:var(--ruby-soft);color:var(--ruby)}
-.actions{display:flex;gap:6px;flex-wrap:wrap;min-width:200px}
+.actions{display:grid;grid-template-columns:1fr 1fr;gap:5px;min-width:170px}
+.actions .btn{padding:6px 8px}
+.meta{margin-top:6px;line-height:1.5}
+td.who-cell{min-width:230px;max-width:280px}
+.admin-body.wrap,.admin-hero .wrap{max-width:1480px}
 .empty{padding:40px 16px;text-align:center;color:var(--muted)}
 
 /* dialogs */
@@ -359,14 +370,15 @@ pre.invite{white-space:pre-wrap;background:var(--sand);border-radius:12px;paddin
       <table>
         <thead>
           <tr class="groups">
-            <th colspan="2"></th>
+            <th></th>
             <th colspan="3" class="grp" data-i18n="th_langs"></th>
-            <th colspan="5"></th>
+            <th colspan="3" class="grp" data-i18n="th_progress"></th>
+            <th></th>
           </tr>
           <tr>
-            <th data-i18n="th_student"></th><th data-i18n="th_code"></th>
+            <th><span data-i18n="th_student"></span> · <span data-i18n="th_code"></span></th>
             <th class="gl" data-i18n="th_local"></th><th data-i18n="th_ajami"></th><th data-i18n="th_foreign"></th>
-            <th class="gl" data-i18n="th_tasks"></th><th data-i18n="th_pref"></th><th data-i18n="th_status"></th><th data-i18n="th_last"></th><th></th>
+            <th class="gl">T0 · <span data-i18n="t0h"></span></th><th>T1 · <span data-i18n="t1h"></span></th><th>T2 · <span data-i18n="t2h"></span></th><th></th>
           </tr>
         </thead>
         <tbody id="rows"></tbody>
@@ -518,6 +530,7 @@ en: {
   st_total:'Students', st_active:'Active accounts', st_signed:'Have signed in', st_never:'Not signed in yet',
   ph_search:'Search name, email, language or code…',
   th_langs:'Language profile', th_student:'Student', th_code:'Identification code', th_local:'Local languages', th_ajami:'Arabic script (Ajami)', th_foreign:'Foreign languages',
+  th_progress:'Task progress', s_incomplete:'Incomplete', s_ongoing:'Ongoing', s_completed:'Completed ✓', st_done:'Tasks completed', st_ongoing:'Tasks ongoing', toast_status:'{name} · {task}: {status}',
   th_tasks:'Assigned tasks', th_pref:'Preference (registration sheet)', th_status:'Status', th_last:'Last sign-in',
   active:'Active', disabled:'Disabled', none:'none', signins:'sign-ins', signin1:'sign-in',
   act_invite:'Invite', act_copy:'Copy code', act_edit:'Edit', act_regen:'New code', act_del:'Delete',
@@ -594,6 +607,7 @@ fr: {
   st_total:'Étudiants', st_active:'Comptes actifs', st_signed:'Se sont connectés', st_never:'Jamais connectés',
   ph_search:'Rechercher un nom, e-mail, langue ou code…',
   th_langs:'Profil linguistique', th_student:'Étudiant·e', th_code:'Code d’identification', th_local:'Langues locales', th_ajami:'Écriture arabe (ajami)', th_foreign:'Langues étrangères',
+  th_progress:'Avancement des tâches', s_incomplete:'Non terminée', s_ongoing:'En cours', s_completed:'Terminée ✓', st_done:'Tâches terminées', st_ongoing:'Tâches en cours', toast_status:'{name} · {task} : {status}',
   th_tasks:'Tâches assignées', th_pref:'Préférence (fiche d’inscription)', th_status:'Statut', th_last:'Dernière connexion',
   active:'Actif', disabled:'Désactivé', none:'aucune', signins:'connexions', signin1:'connexion',
   act_invite:'Inviter', act_copy:'Copier le code', act_edit:'Modifier', act_regen:'Nouveau code', act_del:'Supprimer',
@@ -728,7 +742,12 @@ async function renderStudent(){
     const on = mine.includes(c.dataset.task);
     c.classList.toggle('mine', on); $('.mine-badge', c).classList.toggle('hidden', !on);
   });
+  const paintStatus = () => $$('.task-card').forEach(c => {
+    const v = statusOf(me, c.dataset.task), b = $('.mine-badge', c);
+    b.textContent = t('s_' + v); b.className = 'mine-badge sb-' + v + (mine.includes(c.dataset.task) ? '' : ' hidden');
+  });
   redraw = () => {
+    paintStatus();
     const names = mine.map(x => t('tn' + x.slice(1)));
     $('[data-bind="taskIntro"]').textContent = mine.length === 3 ? t('intro_all')
       : mine.length > 1 ? t('intro_some', {tasks:names.join(t('and'))})
@@ -757,6 +776,7 @@ async function renderAdmin(){
   $('#csvBtn').addEventListener('click', exportCsv);
   $('#pwBtn').addEventListener('click', () => { $('#pwForm').reset(); showMsg($('#pwMsg')); $('#dlgPw').showModal(); });
   $('#rows').addEventListener('click', onRowClick);
+  $('#rows').addEventListener('change', onStatusChange);
   redraw = () => { drawStats(); drawRows(); };
   await loadStudents();
 }
@@ -773,8 +793,11 @@ function drawStats(){
   if (!$('#stats')) return;
   const active = students.filter(s => s.active).length;
   const signed = students.filter(s => s.last_login_at).length;
+  const all = students.flatMap(s => TASKS.map(k => statusOf(s, k)));
+  const done = all.filter(x => x === 'completed').length, ongoing = all.filter(x => x === 'ongoing').length;
   $('#stats').innerHTML = [
-    [students.length, t('st_total')], [active, t('st_active')], [signed, t('st_signed')], [students.length - signed, t('st_never')]
+    [students.length, t('st_total')], [active, t('st_active')], [signed, t('st_signed')], [students.length - signed, t('st_never')],
+    [`${done}/${students.length * 3}`, t('st_done')], [ongoing, t('st_ongoing')]
   ].map(([n, l]) => `<div class="stat"><b>${n}</b><span>${esc(l)}</span></div>`).join('');
 }
 
@@ -795,6 +818,13 @@ function langCell(langs, levels, strong){
     return `<div><span class="${strong ? 'ajami' : ''}">${esc(x)}</span>${v ? ` <span class="lvl ${lvlClass(v)}">${esc(v)}</span>` : ''}</div>`;
   }).join('');
 }
+const TASKS = ['T0','T1','T2'], STATUSES = ['incomplete','ongoing','completed'];
+const statusOf = (s, k) => (s.task_status || {})[k] || 'incomplete';
+function statusCell(s, k, first){
+  const v = statusOf(s, k);
+  return `<td class="${first ? 'gl' : ''}"><select class="st st-${v}" data-task="${k}" aria-label="${k}">${
+    STATUSES.map(o => `<option value="${o}"${o === v ? ' selected' : ''}>${esc(t('s_' + o))}</option>`).join('')}</select></td>`;
+}
 const prefCell = c => {
   if (!c) return '<span class="sub">—</span>';
   return c.split(/\s*\+\s*/).filter(Boolean).map(n => `<span class="pill t">${esc(t('tn' + (Number(n) - 1)) || n)}</span>`).join(' ');
@@ -807,15 +837,11 @@ function drawRows(){
   $('#emptyRows').classList.toggle('hidden', students.length > 0);
   $('#rows').innerHTML = list.map(s => { const p = s.profile || {}; return `
     <tr data-id="${esc(s.id)}">
-      <td><b>${esc(s.full_name || '—')}</b><div class="sub">${esc(s.email)}</div>${s.institution ? `<div class="sub">${esc(s.institution)}</div>` : ''}${s.notes ? `<div class="note">⚠ ${esc(s.notes)}</div>` : ''}</td>
-      <td><code class="k">${esc(s.code)}</code></td>
+      <td class="who-cell"><b>${esc(s.full_name || '—')}</b><div class="sub">${esc(s.email)}</div><div style="margin-top:5px"><code class="k">${esc(s.code)}</code></div>${s.institution ? `<div class="sub">${esc(s.institution)}</div>` : ''}<div class="meta">${s.active ? `<span class="pill on">${esc(t('active'))}</span>` : `<span class="pill off">${esc(t('disabled'))}</span>`} <span class="sub">${esc(t('th_last'))}: ${fmtDate(s.last_login_at)} · ${s.login_count} ${esc(s.login_count === 1 ? t('signin1') : t('signins'))}</span></div>${s.notes ? `<div class="note">⚠ ${esc(s.notes)}</div>` : ''}</td>
       <td class="lc gl">${langCell(p.local_languages, p.local_level)}</td>
       <td class="lc">${langCell(p.arabic_script, p.arabic_script_level, true)}</td>
       <td class="lc">${langCell(p.foreign_languages, p.foreign_level)}</td>
-      <td class="gl">${(s.tasks || []).map(x => `<span class="pill t">${esc(x)}</span>`).join('') || `<span class="sub">${esc(t('none'))}</span>`}</td>
-      <td>${prefCell(p.task_choice)}</td>
-      <td>${s.active ? `<span class="pill on">${esc(t('active'))}</span>` : `<span class="pill off">${esc(t('disabled'))}</span>`}</td>
-      <td>${fmtDate(s.last_login_at)}<div class="sub">${s.login_count} ${esc(s.login_count === 1 ? t('signin1') : t('signins'))}</div></td>
+      ${TASKS.map((k, i) => statusCell(s, k, i === 0)).join('')}
       <td><div class="actions">
         <button class="btn sm" data-act="invite" type="button">${esc(t('act_invite'))}</button>
         <button class="btn sm" data-act="copy" type="button">${esc(t('act_copy'))}</button>
@@ -824,6 +850,17 @@ function drawRows(){
         <button class="btn sm danger" data-act="del" type="button">${esc(t('act_del'))}</button>
       </div></td>
     </tr>`; }).join('');
+}
+async function onStatusChange(e){
+  const sel = e.target.closest('select.st'); if (!sel) return;
+  const s = students.find(x => x.id === sel.closest('tr').dataset.id); if (!s) return;
+  const prev = statusOf(s, sel.dataset.task), next = sel.value;
+  sel.className = 'st st-' + next; sel.disabled = true;
+  try {
+    const u = await adminCall('abjad_admin_set_task_status', {p_id:s.id, p_task:sel.dataset.task, p_status:next});
+    Object.assign(s, u); drawStats(); toast(t('toast_status', {name:s.full_name || s.email, task:sel.dataset.task, status:t('s_' + next)}));
+  } catch (err) { sel.value = prev; sel.className = 'st st-' + prev; toast(err.message); }
+  finally { sel.disabled = false; }
 }
 async function onRowClick(e){
   const b = e.target.closest('button[data-act]'); if (!b) return;
@@ -957,9 +994,9 @@ function openInvite(s){
 /* CSV */
 const PROFILE_KEYS = ['local_languages','local_level','arabic_script','arabic_script_level','foreign_languages','foreign_level','task_choice'];
 function exportCsv(){
-  const cols = ['full_name','email','institution','code','tasks', ...PROFILE_KEYS, 'active','login_count','last_login_at','created_at','notes'];
+  const cols = ['full_name','email','institution','code','T0_status','T1_status','T2_status', ...PROFILE_KEYS, 'active','login_count','last_login_at','created_at','notes'];
   const cell = v => { v = Array.isArray(v) ? v.join(' ') : (v ?? ''); v = String(v); return /[",\n;]/.test(v) ? `"${v.replace(/"/g, '""')}"` : v; };
-  const csv = [cols.join(','), ...students.map(s => { const f = {...(s.profile || {}), ...s}; return cols.map(c => cell(f[c])).join(','); })].join('\n');
+  const csv = [cols.join(','), ...students.map(s => { const f = {...(s.profile || {}), ...s, T0_status:statusOf(s,'T0'), T1_status:statusOf(s,'T1'), T2_status:statusOf(s,'T2')}; return cols.map(c => cell(f[c])).join(','); })].join('\n');
   const a = document.createElement('a');
   a.href = URL.createObjectURL(new Blob(['﻿' + csv], {type:'text/csv'}));
   a.download = `wolofal-abjadnlp2027-students-${new Date().toISOString().slice(0,10)}.csv`;
