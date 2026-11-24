@@ -7,6 +7,7 @@
 <meta name="description" content="Contributor portal for the Wolofal data collection and annotation of the AbjadNLP 2027 shared tasks.">
 <meta name="robots" content="noindex">
 <link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="stylesheet" href="tasks.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Noto+Kufi+Arabic:wght@500;600;700&display=swap" rel="stylesheet">
@@ -267,6 +268,7 @@ pre.invite{white-space:pre-wrap;background:var(--sand);border-radius:12px;paddin
         <span class="chip gold" data-i18n="chip_coling"></span>
         <span class="chip" data-i18n="chip_edition"></span>
       </div>
+      <div class="subnav"><a href="#/welcome" class="on" data-i18n="nav_pres"></a><a href="#/tasks" data-i18n="nav_tasks"></a></div>
     </div>
   </section>
 
@@ -326,7 +328,8 @@ pre.invite{white-space:pre-wrap;background:var(--sand);border-radius:12px;paddin
         <div class="card task-card" data-task="T1"><span class="mine-badge hidden" data-i18n="mine"></span><div class="tag">Task 1</div><h3 data-i18n="t1h"></h3><p data-i18n="t1p"></p></div>
         <div class="card task-card" data-task="T2"><span class="mine-badge hidden" data-i18n="mine"></span><div class="tag">Task 2</div><h3 data-i18n="t2h"></h3><p data-i18n="t2p"></p></div>
       </div>
-      <p class="hint" style="margin-top:18px" data-i18n="p4hint"></p>
+      <p style="margin-top:22px"><a class="btn primary" href="#/tasks" data-i18n="open_tasks"></a></p>
+      <p class="hint" style="margin-top:12px" data-i18n="p4hint"></p>
     </div>
   </section>
 
@@ -354,6 +357,7 @@ pre.invite{white-space:pre-wrap;background:var(--sand);border-radius:12px;paddin
         <div class="eyebrow" data-i18n="a_eyebrow"></div>
         <h1 data-i18n="a_title"></h1>
         <p data-i18n="a_sub"></p>
+        <div id="adminNavSlot"></div>
       </div>
       <div class="toolbar" style="margin:0">
         <button class="btn" type="button" id="pwBtn" data-i18n="btn_pw"></button>
@@ -512,11 +516,11 @@ en: {
   q3:'Your work helps make Wolofal visible to language technology. The data you produce will outlast this competition.',
   k4:'04 · Your contribution', h4t:'What we are asking you to do',
   p4:'The contribution is split into three tasks.',
-  mine:'Assigned to you',
+  mine:'Assigned to you', open_tasks:'Open my tasks →',
   t0h:'Verify', t1h:'Augment', t2h:'Annotate',
-  t0p:'Check the <strong>veracity of the Wolofal data</strong> collected during corpus collection. Is the text really Wolof? Is it written correctly in Wolofal? Are the source and metadata right? Flag errors, duplicates and doubtful items.',
-  t1p:'<strong>Augment the corpus</strong> with new, authentic Wolofal texts, together with their sources, so the datasets are larger and more diverse in genre, topic and author.',
-  t2p:'<strong>Annotate the translations into Wolofal</strong>: check that each translation is faithful to the original, reads naturally to a Wolof speaker and follows Wolofal orthography. Correct it where needed.',
+  t0p:'Check the <strong>veracity of the Wolofal data</strong> collected during corpus collection: for each sentence you get, say whether it really is Wolofal (Wolof in Arabic script). If not, say why.',
+  t1p:'<strong>Augment the corpus</strong> with new, authentic Wolofal passages (50–150 words) by the author assigned to you, together with their sources: 200 passages per author.',
+  t2p:'<strong>Annotate the translations</strong>: check that each French → Wolofal translation is correct and edit it if not, then check that the sentiment (positive, negative, neutral) is preserved.',
   p4hint:'Detailed guidelines and access to the data will be shared with you by the coordinator. For any question, write to <a href="mailto:research@elmoussa.ch">research@elmoussa.ch</a>.',
   intro_all:'You are assigned to all three.', intro_some:'You are assigned to {tasks}. They are highlighted below.', intro_one:'You are assigned to {tasks}. It is highlighted below.', intro_none:'Your coordinator will tell you which tasks you are assigned to.', and:' and ',
   k5:'05 · Thank you', h5t:'Thank you, and welcome to research',
@@ -589,11 +593,11 @@ fr: {
   q3:'Votre travail rend le wolofal visible pour les technologies de la langue. Les données que vous produisez survivront à cette compétition.',
   k4:'04 · Votre contribution', h4t:'Ce que nous vous demandons',
   p4:'La contribution se divise en trois tâches.',
-  mine:'Qui vous est assignée',
+  mine:'Qui vous est assignée', open_tasks:'Ouvrir mes tâches →',
   t0h:'Vérifier', t1h:'Enrichir', t2h:'Annoter',
-  t0p:'Vérifier la <strong>véracité des données wolofal</strong> recueillies lors de la collecte du corpus. Le texte est-il vraiment en wolof ? Est-il correctement écrit en wolofal ? La source et les métadonnées sont-elles justes ? Signalez les erreurs, doublons et éléments douteux.',
-  t1p:'<strong>Enrichir le corpus</strong> avec de nouveaux textes wolofal authentiques, accompagnés de leurs sources, pour des jeux de données plus grands et plus variés en genres, thèmes et auteurs.',
-  t2p:'<strong>Annoter les traductions vers le wolofal</strong> : vérifier que chaque traduction est fidèle à l’original, naturelle pour un locuteur wolof et conforme à l’orthographe wolofal. Corrigez-la si nécessaire.',
+  t0p:'Vérifier la <strong>véracité des données wolofal</strong> recueillies lors de la collecte du corpus : pour chaque phrase reçue, dites si c’est bien du wolofal (wolof en écriture arabe). Sinon, dites pourquoi.',
+  t1p:'<strong>Enrichir le corpus</strong> avec de nouveaux passages wolofal authentiques (50 à 150 mots) de l’auteur qui vous est assigné, avec leurs sources : 200 passages par auteur.',
+  t2p:'<strong>Annoter les traductions</strong> : vérifiez que chaque traduction français → wolofal est correcte et corrigez-la sinon, puis vérifiez que le sentiment (positif, négatif, neutre) est conservé.',
   p4hint:'Les consignes détaillées et l’accès aux données vous seront transmis par le coordinateur. Pour toute question, écrivez à <a href="mailto:research@elmoussa.ch">research@elmoussa.ch</a>.',
   intro_all:'Les trois vous sont assignées.', intro_some:'Vous êtes assigné·e à {tasks}. Elles sont mises en évidence ci-dessous.', intro_one:'Vous êtes assigné·e à {tasks}. Elle est mise en évidence ci-dessous.', intro_none:'Votre coordinateur vous indiquera les tâches qui vous sont assignées.', and:' et ',
   k5:'05 · Merci', h5t:'Merci, et bienvenue dans la recherche',
@@ -681,6 +685,7 @@ function setBar(text, showLogout){ $('#who').textContent = text || ''; $('#logou
 async function route(){
   redraw = null;
   const h = location.hash || '#/';
+  if (routeTasks(h)) return;
   if (h.startsWith('#/admin')) return renderAdmin();
   if (h.startsWith('#/welcome')) return renderStudent();
   return renderLogin();
@@ -770,6 +775,7 @@ async function renderAdmin(){
   setBar(me.email, true);
   mount('#tpl-admin');
   $('#portalUrl').textContent = portalUrl();
+  $('#adminNavSlot').outerHTML = adminNav('students');
   $('#search').addEventListener('input', drawRows);
   $('#addBtn').addEventListener('click', () => openStudent(null));
   $('#bulkBtn').addEventListener('click', () => { $('#bulkText').value = ''; showMsg($('#bulkMsg')); $('#dlgBulk').showModal(); });
@@ -837,7 +843,7 @@ function drawRows(){
   $('#emptyRows').classList.toggle('hidden', students.length > 0);
   $('#rows').innerHTML = list.map(s => { const p = s.profile || {}; return `
     <tr data-id="${esc(s.id)}">
-      <td class="who-cell"><b>${esc(s.full_name || '—')}</b><div class="sub">${esc(s.email)}</div><div style="margin-top:5px"><code class="k">${esc(s.code)}</code></div>${s.institution ? `<div class="sub">${esc(s.institution)}</div>` : ''}<div class="meta">${s.active ? `<span class="pill on">${esc(t('active'))}</span>` : `<span class="pill off">${esc(t('disabled'))}</span>`} <span class="sub">${esc(t('th_last'))}: ${fmtDate(s.last_login_at)} · ${s.login_count} ${esc(s.login_count === 1 ? t('signin1') : t('signins'))}</span></div>${s.notes ? `<div class="note">⚠ ${esc(s.notes)}</div>` : ''}</td>
+      <td class="who-cell"><b>${esc(s.full_name || '—')}</b><div class="sub">${esc(s.email)}</div><div style="margin-top:5px"><code class="k">${esc(s.code)}</code>${s.ann_id ? ` <span class="pill t">${esc(s.ann_id)}</span>` : ''}</div>${s.institution ? `<div class="sub">${esc(s.institution)}</div>` : ''}<div class="meta">${s.active ? `<span class="pill on">${esc(t('active'))}</span>` : `<span class="pill off">${esc(t('disabled'))}</span>`} <span class="sub">${esc(t('th_last'))}: ${fmtDate(s.last_login_at)} · ${s.login_count} ${esc(s.login_count === 1 ? t('signin1') : t('signins'))}</span></div>${s.notes ? `<div class="note">⚠ ${esc(s.notes)}</div>` : ''}</td>
       <td class="lc gl">${langCell(p.local_languages, p.local_level)}</td>
       <td class="lc">${langCell(p.arabic_script, p.arabic_script_level, true)}</td>
       <td class="lc">${langCell(p.foreign_languages, p.foreign_level)}</td>
@@ -1017,7 +1023,8 @@ $('#pwForm').addEventListener('submit', async e => {
 });
 
 setLang(lang);
-route();
+/* route() is called at the end of tasks.js, once the task pages are defined */
 </script>
+<script src="tasks.js"></script>
 </body>
 </html>
