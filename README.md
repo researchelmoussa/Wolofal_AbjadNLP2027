@@ -39,7 +39,7 @@ Task status (incomplete → ongoing → completed) now follows the answers autom
   - a per-student table.
 - **Exports** (CSV and JSON for each task, or one ZIP with everything). Original columns and rows are kept, and answers are added:
   - **T0:** each of the 7 CSVs gains `verified`, `verified_why`, `verified_by`, `verified_at` and `in_verification_sample`.
-  - **T1:** `stream_a_author_passages.csv` (passage, word count, book title / link) and `pdf_uploads.csv` (list of uploaded PDFs).
+  - **T1:** `stream_a_author_passages.csv` (passage, word count, book title / link), `pdf_uploads.csv` (list of uploaded PDFs with their `zip_path`) and the PDF files themselves in `T1_augment/pdfs/ANN_xx/` (one folder per annotator). The JSON export has no PDF files.
   - **T2:** each pack with `annotator_corrected_wolofal_ajami` (the student's correction when they fixed the translation), `annotator_verified_sentiment` and `annotator_notes` filled in, plus `translation_correct`, `sentiment_confirmed`, `iaa_scope` and `annotated_at`; also `T2_common_set_all_annotators.csv`.
 - **Allocation** (`#/admin/alloc`):
   - link each student to an `ANN_xx` ID; T1 and T2 follow this ID;

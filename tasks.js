@@ -66,7 +66,7 @@ Object.assign(I18N.en, {
   p_t0:'Task 0 · Verify', p_t1:'Task 1 · Augment', p_t2:'Task 2 · Annotate',
   cov_target:'Coverage of the 50 % sample', verdicts:'Verdicts', no_reasons:'Reasons for “No”', by_group:'By group', by_file:'By source file',
   g_author_passages:'Author passages', g_codeswitch:'Code-switched', g_monolingual:'Monolingual lines',
-  per_author:'Passages per author', by_source:'By source', words_total:'{n} words in total', pdf_per_author:'PDFs per author (max 20)', tr_fixed:'Corrected by the annotator', pdf_list:'Uploaded PDFs', pdf_total:'{n} PDFs · {s}', download:'Download',
+  per_author:'Passages per author', by_source:'By source', words_total:'{n} words in total', pdf_per_author:'PDFs per author (max 20)', tr_fixed:'Corrected by the annotator', pdf_list:'Uploaded PDFs', pdf_total:'{n} PDFs · {s}', download:'Download', exp_pdfs:'Adding PDFs to the export: {i} / {n}…', exp_pdfs_btn:'⬇ ZIP · one folder per ANN',
   pack_prog:'Progress per pack', changes:'Proposed → annotator (changed)', confirmed_share:'Confirmed', agreement:'Agreement',
   fleiss:'Fleiss κ on the {n} common units ({r} answers)', cohen:'Cohen κ per pair (units shared by two packs)',
   disputed:'Disputed units (agreement below 75 %)', none_yet:'No answers yet.', pair:'Pair', units:'units',
@@ -139,7 +139,7 @@ Object.assign(I18N.fr, {
   p_t0:'Tâche 0 · Vérifier', p_t1:'Tâche 1 · Enrichir', p_t2:'Tâche 2 · Annoter',
   cov_target:'Couverture de l’échantillon de 50 %', verdicts:'Verdicts', no_reasons:'Raisons des « Non »', by_group:'Par groupe', by_file:'Par fichier source',
   g_author_passages:'Passages d’auteurs', g_codeswitch:'Alternance codique', g_monolingual:'Lignes monolingues',
-  per_author:'Passages par auteur', by_source:'Par source', words_total:'{n} mots au total', pdf_per_author:'PDF par auteur (max 20)', tr_fixed:'Corrigées par l’annotateur', pdf_list:'PDF déposés', pdf_total:'{n} PDF · {s}', download:'Télécharger',
+  per_author:'Passages par auteur', by_source:'Par source', words_total:'{n} mots au total', pdf_per_author:'PDF par auteur (max 20)', tr_fixed:'Corrigées par l’annotateur', pdf_list:'PDF déposés', pdf_total:'{n} PDF · {s}', download:'Télécharger', exp_pdfs:'Ajout des PDF à l’export : {i} / {n}…', exp_pdfs_btn:'⬇ ZIP · un dossier par ANN',
   pack_prog:'Avancement par lot', changes:'Proposé → annotateur (modifiés)', confirmed_share:'Confirmés', agreement:'Accord',
   fleiss:'κ de Fleiss sur les {n} unités communes ({r} réponses)', cohen:'κ de Cohen par paire (unités partagées par deux lots)',
   disputed:'Unités en désaccord (accord inférieur à 75 %)', none_yet:'Pas encore de réponses.', pair:'Paire', units:'unités',
@@ -570,11 +570,11 @@ function download(name, blob){
 }
 const CRC = (() => { const tb = new Uint32Array(256); for (let n = 0; n < 256; n++) { let c = n; for (let k = 0; k < 8; k++) c = c & 1 ? 0xEDB88320 ^ (c >>> 1) : c >>> 1; tb[n] = c >>> 0; } return tb; })();
 const crc32 = b => { let c = 0xFFFFFFFF; for (let i = 0; i < b.length; i++) c = CRC[(c ^ b[i]) & 0xFF] ^ (c >>> 8); return (c ^ 0xFFFFFFFF) >>> 0; };
-function zip(files){ // [{name, text}] → Blob (stored, no compression; UTF-8 names)
+function zip(files){ // [{name, text} | {name, bytes}] → Blob (stored, no compression; UTF-8 names)
   const enc = new TextEncoder(), parts = [], central = []; let off = 0;
   const d = new Date(), dt = ((d.getHours() << 11) | (d.getMinutes() << 5) | (d.getSeconds() >> 1)), dd = (((d.getFullYear() - 1980) << 9) | ((d.getMonth() + 1) << 5) | d.getDate());
   for (const f of files) {
-    const name = enc.encode(f.name), data = enc.encode(f.text), crc = crc32(data);
+    const name = enc.encode(f.name), data = f.bytes || enc.encode(f.text), crc = crc32(data);
     const h = new DataView(new ArrayBuffer(30));
     [[0, 0x04034b50, 4], [4, 20, 2], [6, 0x0800, 2], [8, 0, 2], [10, dt, 2], [12, dd, 2], [14, crc, 4], [18, data.length, 4], [22, data.length, 4], [26, name.length, 2], [28, 0, 2]]
       .forEach(([o, v, s]) => s === 4 ? h.setUint32(o, v, true) : h.setUint16(o, v, true));
@@ -593,7 +593,7 @@ const REASON_EN = {arabic:'Arabic, not Wolof', other_lang:'Another language', la
 const stamp = () => new Date().toISOString().slice(0, 10);
 const base = p => p.split('/').pop();
 
-async function buildExport(task){
+async function buildExport(task, opts = {}){
   const raw = await adminCall('abjad_admin_export', {p_task:task});
   if (task === 'T0') {
     const extra = ['verified', 'verified_why', 'verified_by', 'verified_at', 'in_verification_sample'];
@@ -611,10 +611,21 @@ async function buildExport(task){
     const rows = raw.map(p => { seq[p.author_id] = (seq[p.author_id] || 0) + 1;
       return {...p, annotator_id:p.ann_id, passage_id:`${p.author_id}_P${String(seq[p.author_id]).padStart(3, '0')}`}; });
     const pdfs = await adminCall('abjad_admin_t1_pdfs', {});
-    const ph = ['pdf_id','annotator_id','author_id','author_name','student','file_name','size_bytes','uploaded_at'];
-    const prow = pdfs.map(f => ({pdf_id:f.id, annotator_id:f.ann_id, author_id:f.author_id, author_name:f.author_name, student:f.student, file_name:f.file_name, size_bytes:f.size_bytes, uploaded_at:f.created_at}));
-    return {files:[{name:'T1_augment/stream_a_author_passages.csv', text:toCsv(header, rows)}, {name:'T1_augment/pdf_uploads.csv', text:toCsv(ph, prow)}],
-      json:{passages:rows.map(r => Object.fromEntries(header.map(h => [h, r[h]]))), pdfs:prow}};
+    const ph = ['pdf_id','annotator_id','author_id','author_name','student','file_name','size_bytes','uploaded_at','zip_path'];
+    const safe = n => n.replace(/[\\/:*?"<>|\u0000-\u001f]/g, '_').slice(0, 150);
+    const zipPath = f => `T1_augment/pdfs/${f.ann_id}/${String(f.id).padStart(4, '0')}_${safe(f.file_name)}`;
+    const prow = pdfs.map(f => ({pdf_id:f.id, annotator_id:f.ann_id, author_id:f.author_id, author_name:f.author_name, student:f.student, file_name:f.file_name, size_bytes:f.size_bytes, uploaded_at:f.created_at, zip_path:zipPath(f)}));
+    const files = [{name:'T1_augment/stream_a_author_passages.csv', text:toCsv(header, rows)}, {name:'T1_augment/pdf_uploads.csv', text:toCsv(ph, prow)}];
+    if (opts.pdfs) {
+      const token = store.get('wol_admin');
+      for (const [k, f] of pdfs.entries()) {
+        toast(t('exp_pdfs', {i:k + 1, n:pdfs.length}));
+        const {url} = await pdfCall({action:'sign', token, id:f.id});
+        const r = await fetch(url); if (!r.ok) throw new Error(`${f.file_name}: ${r.status}`);
+        files.push({name:zipPath(f), bytes:new Uint8Array(await r.arrayBuffer())});
+      }
+    }
+    return {files, json:{passages:rows.map(r => Object.fromEntries(header.map(h => [h, r[h]]))), pdfs:prow}};
   }
   // T2
   const TR = {}; (await adminCall('abjad_admin_t2_translations', {})).forEach(x => TR[x.u + '|' + x.a] = x);
@@ -649,13 +660,13 @@ async function exportTask(task, kind){
   try {
     if (task === 'ALL') {
       const all = [];
-      for (const k of ['T0', 'T1', 'T2']) { const x = await buildExport(k); all.push(...x.files, {name:`json/${k}.json`, text:JSON.stringify(x.json, null, 1)}); }
+      for (const k of ['T0', 'T1', 'T2']) { const x = await buildExport(k, {pdfs:true}); all.push(...x.files, {name:`json/${k}.json`, text:JSON.stringify(x.json, null, 1)}); }
       return download(`wolofal-abjadnlp2027-all-tasks-${stamp()}.zip`, zip(all));
     }
-    const x = await buildExport(task);
+    const x = await buildExport(task, {pdfs:kind !== 'json'});
     if (kind === 'json') return download(`wolofal-abjadnlp2027-${task}-${stamp()}.json`, new Blob([JSON.stringify(x.json, null, 1)], {type:'application/json'}));
     if (x.files.length === 1) return download(`wolofal-abjadnlp2027-${task}-${stamp()}.csv`, new Blob([x.files[0].text], {type:'text/csv'}));
-    download(`wolofal-abjadnlp2027-${task}-csv-${stamp()}.zip`, zip(x.files));
+    download(`wolofal-abjadnlp2027-${task}-${task === 'T1' ? 'csv-pdfs' : 'csv'}-${stamp()}.zip`, zip(x.files));
   } catch (e) { toast(e.message); }
 }
 
@@ -728,7 +739,7 @@ async function renderAdminData(){
           ${t1.authors.map(a => hbar(`${a.ann_id} · ${a.author_name}`, a.done, a.target, 'gold', `${a.done}/${a.target}`)).join('')}
           <div class="sub-h">${esc(t('pdf_per_author'))} · ${esc(t('pdf_total', {n:PDFS.length, s:fmtSize(pdfBytes)}))}</div>
           ${t1.authors.map(a => hbar(`${a.ann_id} · ${a.author_name}`, pdfPer[a.ann_id] || 0, 20, 'gold', `${pdfPer[a.ann_id] || 0}/20`)).join('')}
-          <div class="sub-h">${esc(t('pdf_list'))}</div>
+          <div class="sub-h" style="display:flex;justify-content:space-between;align-items:center;gap:8px">${esc(t('pdf_list'))}${PDFS.length ? `<button class="btn sm" type="button" data-exp="T1" data-kind="csv">${esc(t('exp_pdfs_btn'))}</button>` : ''}</div>
           ${PDFS.length ? `<div class="plist"><table class="disp"><tbody>${PDFS.map(f => `<tr><td><code class="k">${esc(f.ann_id)}</code></td><td title="${esc(f.student)}">📄 ${esc(f.file_name)}</td><td class="sub">${fmtSize(f.size_bytes)}</td>
             <td><button class="btn sm" type="button" data-pdf="${f.id}">${esc(t('download'))}</button></td></tr>`).join('')}</tbody></table></div>` : `<p class="hint">${esc(t('none_yet'))}</p>`}
         </div>
