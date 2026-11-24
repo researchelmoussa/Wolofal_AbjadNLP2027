@@ -7,13 +7,14 @@ Object.assign(I18N.en, {
   nav_pres:'Presentation', nav_tasks:'My tasks', nav_students:'Students', nav_data:'Data & progress', nav_alloc:'Allocation',
   hub_eyebrow:'My workspace', hub_title:'Hello <em>{name}</em>, here are your tasks.',
   hub_sub:'Every answer is saved as soon as you give it. You can stop and come back at any time.',
-  hub_auto:'Your status in the coordinator’s table changes by itself: <b>incomplete</b> → <b>ongoing</b> after your first answer → <b>completed</b> when your share is done.',
+  hub_auto:'Start with Task 0. When it is completed, Tasks 1 and 2 unlock together. Your status in the coordinator’s table changes by itself: <b>incomplete</b> → <b>ongoing</b> after your first answer → <b>completed</b> when your share is done.',
   hub_t0:'Read sentences from the collected native Wolofal corpus and confirm whether each one really is Wolofal. If not, say why.',
   hub_t1:'Add new passages (50–150 words) by your assigned author, with their source.',
   hub_t2:'Check the sentiment proposed for each corrected Wolofal Ajami sentence. Confirm it, or correct it and say why.',
   hub_t1_author:'Your author: <b>{a}</b>', not_assigned_task:'This task is not assigned to you.',
   open_t0:'Verify →', open_t1:'Add passages →', open_t2:'Annotate →', unit_sent:'sentences', unit_pass:'passages',
-  no_ann:'Your coordinator has not given you an annotator ID yet (ANN_01 … ANN_08). This task opens as soon as it is set.',
+  locked:'🔒 Unlocks automatically when Task 0 is completed ({d} / {n}). Tasks 1 and 2 open together.',
+  t0_unlocked:'Tasks 1 and 2 are now open.',
   no_items:'Nothing has been allocated to you yet. Your coordinator will open this task soon.',
   t0_eyebrow:'Task 0 · Verify', t0_title:'Is this sentence <em>Wolofal</em>?',
   t0_sub:'Item {i} of your {n}. Your set is drawn at random, and nobody else gets the same sentences.',
@@ -44,7 +45,7 @@ Object.assign(I18N.en, {
   t2_done:'🎉 You have annotated all your items. Thank you!',
   positive:'positive', negative:'negative', neutral:'neutral',
   err_reason_required:'Please give a reason.', err_word_count:'The passage must have 50 to 150 words.', err_duplicate_passage:'This passage is already in the database.',
-  err_no_author:'No author is assigned to you yet.', err_not_assigned:'This item is not assigned to you.', err_invalid_sentiment:'Choose a sentiment.',
+  err_no_author:'No author is assigned to you yet.', err_locked:'Complete Task 0 first.', err_not_assigned:'This item is not assigned to you.', err_invalid_sentiment:'Choose a sentiment.',
   /* admin data */
   ad_title:'Collection dashboard', ad_sub:'Live progress of Task 0, Task 1 and Task 2. Exports keep the original file formats.',
   al_title:'Allocation', al_sub:'Link students to annotator IDs, set Task 1 authors and spread the Task 0 sample.',
@@ -61,20 +62,21 @@ Object.assign(I18N.en, {
   exp_all:'Export everything (ZIP)', exp_csv:'CSV', exp_json:'JSON', exporting:'Preparing export…',
   al_ann:'Annotator ID', al_author:'T1 author', al_target:'Target', al_t0:'T0 allocated', al_realloc:'Spread the T0 sample again', al_realloc_q:'Give unanswered Task 0 items of students who left (or lost T0) to the active students with T0, evenly? Answered items stay where they are.',
   al_done:'T0 sample spread over {n} students.', al_authors:'Task 1 authors per annotator ID', al_students:'Students and annotator IDs', al_save:'Save', al_none:'— none —',
-  al_help:'Task 1 and Task 2 follow the annotator ID: pack <code class="k">ANN_03</code> and the author of <code class="k">ANN_03</code> go to the student who holds that ID.',
+  al_help:'Task 1 and Task 2 follow the annotator ID: pack <code class="k">ANN_03</code> and the author of <code class="k">ANN_03</code> go to the student who holds that ID. Students get the first free ID automatically when they complete Task 0 (which unlocks Tasks 1 and 2); you can change it here.',
   al_t0help:'The Task 0 sample has {s} of {n} distinct texts (50 %). It is spread evenly over active students who have Task 0.'
 });
 Object.assign(I18N.fr, {
   nav_pres:'Présentation', nav_tasks:'Mes tâches', nav_students:'Étudiants', nav_data:'Données & avancement', nav_alloc:'Répartition',
   hub_eyebrow:'Mon espace', hub_title:'Bonjour <em>{name}</em>, voici vos tâches.',
   hub_sub:'Chaque réponse est enregistrée dès que vous la donnez. Vous pouvez vous arrêter et revenir à tout moment.',
-  hub_auto:'Votre statut dans le tableau du coordinateur change tout seul : <b>non terminée</b> → <b>en cours</b> après votre première réponse → <b>terminée</b> quand votre part est faite.',
+  hub_auto:'Commencez par la tâche 0. Une fois terminée, les tâches 1 et 2 se débloquent en même temps. Votre statut dans le tableau du coordinateur change tout seul : <b>non terminée</b> → <b>en cours</b> après votre première réponse → <b>terminée</b> quand votre part est faite.',
   hub_t0:'Lisez des phrases du corpus wolofal natif collecté et confirmez si chacune est bien du wolofal. Sinon, dites pourquoi.',
   hub_t1:'Ajoutez de nouveaux passages (50–150 mots) de votre auteur, avec leur source.',
   hub_t2:'Vérifiez le sentiment proposé pour chaque phrase en ajami wolofal corrigée. Confirmez-le, ou corrigez-le et dites pourquoi.',
   hub_t1_author:'Votre auteur : <b>{a}</b>', not_assigned_task:'Cette tâche ne vous est pas assignée.',
   open_t0:'Vérifier →', open_t1:'Ajouter des passages →', open_t2:'Annoter →', unit_sent:'phrases', unit_pass:'passages',
-  no_ann:'Votre coordinateur ne vous a pas encore attribué d’identifiant d’annotateur (ANN_01 … ANN_08). Cette tâche s’ouvre dès qu’il est défini.',
+  locked:'🔒 Se débloque automatiquement quand la tâche 0 est terminée ({d} / {n}). Les tâches 1 et 2 s’ouvrent en même temps.',
+  t0_unlocked:'Les tâches 1 et 2 sont maintenant ouvertes.',
   no_items:'Rien ne vous a encore été attribué. Votre coordinateur ouvrira bientôt cette tâche.',
   t0_eyebrow:'Tâche 0 · Vérifier', t0_title:'Cette phrase est-elle du <em>wolofal</em> ?',
   t0_sub:'Élément {i} sur {n}. Votre lot est tiré au hasard et personne d’autre n’a les mêmes phrases.',
@@ -105,7 +107,7 @@ Object.assign(I18N.fr, {
   t2_done:'🎉 Vous avez annoté tous vos éléments. Merci !',
   positive:'positif', negative:'négatif', neutral:'neutre',
   err_reason_required:'Merci d’indiquer une raison.', err_word_count:'Le passage doit compter 50 à 150 mots.', err_duplicate_passage:'Ce passage est déjà enregistré.',
-  err_no_author:'Aucun auteur ne vous est encore assigné.', err_not_assigned:'Cet élément ne vous est pas assigné.', err_invalid_sentiment:'Choisissez un sentiment.',
+  err_no_author:'Aucun auteur ne vous est encore assigné.', err_locked:'Terminez d’abord la tâche 0.', err_not_assigned:'Cet élément ne vous est pas assigné.', err_invalid_sentiment:'Choisissez un sentiment.',
   ad_title:'Tableau de bord de la collecte', ad_sub:'Avancement en direct des tâches 0, 1 et 2. Les exports gardent le format des fichiers d’origine.',
   al_title:'Répartition', al_sub:'Associez les étudiants aux identifiants d’annotateur, fixez les auteurs de la tâche 1 et répartissez l’échantillon de la tâche 0.',
   k_t0:'T0 · vérifiés / échantillon', k_t0cov:'T0 · part du corpus vérifiée', k_t1:'T1 · passages collectés', k_t1a:'T1 · auteurs à l’objectif',
@@ -121,7 +123,7 @@ Object.assign(I18N.fr, {
   exp_all:'Tout exporter (ZIP)', exp_csv:'CSV', exp_json:'JSON', exporting:'Préparation de l’export…',
   al_ann:'ID annotateur', al_author:'Auteur T1', al_target:'Objectif', al_t0:'T0 attribués', al_realloc:'Répartir à nouveau l’échantillon T0', al_realloc_q:'Donner les éléments T0 sans réponse des étudiants partis (ou sans T0) aux étudiants actifs ayant T0, à parts égales ? Les éléments déjà traités restent en place.',
   al_done:'Échantillon T0 réparti sur {n} étudiants.', al_authors:'Auteurs de la tâche 1 par identifiant', al_students:'Étudiants et identifiants d’annotateur', al_save:'Enregistrer', al_none:'— aucun —',
-  al_help:'Les tâches 1 et 2 suivent l’identifiant : le lot <code class="k">ANN_03</code> et l’auteur de <code class="k">ANN_03</code> vont à l’étudiant·e qui porte cet identifiant.',
+  al_help:'Les tâches 1 et 2 suivent l’identifiant : le lot <code class="k">ANN_03</code> et l’auteur de <code class="k">ANN_03</code> vont à l’étudiant·e qui porte cet identifiant. Chaque étudiant·e reçoit automatiquement le premier identifiant libre en terminant la tâche 0 (ce qui débloque les tâches 1 et 2) ; vous pouvez le modifier ici.',
   al_t0help:'L’échantillon de la tâche 0 compte {s} des {n} textes distincts (50 %). Il est réparti à parts égales entre les étudiants actifs ayant la tâche 0.'
 });
 
@@ -163,13 +165,13 @@ async function renderTasksHub(){
       return `<div class="card task-card ${on ? 'mine' : 'off'}"><div class="tag">${esc(t('tn' + k.slice(1)))}</div><h3>${esc(title)}</h3>
         <p>${t(txt)}${extra ? '<br>' + extra : ''}</p>
         ${on && !blocked ? `<div class="pnum">${fmtN(p.done)} / ${fmtN(p.total)} ${esc(t(unit))} <span>${pct(p.done, p.total)}%</span></div><div class="bar ${cls}"><i style="width:${pct(p.done, p.total)}%"></i></div>
-          <a class="btn primary" href="${href}">${esc(t(btn))}</a>` : `<p class="hint">${esc(on ? t('no_ann') : t('not_assigned_task'))}</p>`}</div>`;
+          <a class="btn primary" href="${href}">${esc(t(btn))}</a>` : `<p class="hint">${esc(on ? t('locked', {d:fmtN(me.T0.done), n:fmtN(me.T0.total)}) : t('not_assigned_task'))}</p>`}</div>`;
     };
     app.innerHTML = heroWs(esc(t('hub_eyebrow')), t('hub_title', {name:esc(name)}), esc(t('hub_sub')), studentNav('tasks')) +
       `<div class="wrap ws-body"><div class="hub">
         ${card('T0', t('t0h'), 'hub_t0', 'unit_sent', '#/t0', 'open_t0', '', '', false)}
-        ${card('T1', t('t1h'), 'hub_t1', 'unit_pass', '#/t1', 'open_t1', 'gold', me.T1.author_name ? t('hub_t1_author', {a:esc(me.T1.author_name)}) : '', !me.ann_id)}
-        ${card('T2', t('t2h'), 'hub_t2', 'unit_sent', '#/t2', 'open_t2', '', '', !me.ann_id)}
+        ${card('T1', t('t1h'), 'hub_t1', 'unit_pass', '#/t1', 'open_t1', 'gold', me.T1.author_name ? t('hub_t1_author', {a:esc(me.T1.author_name)}) : '', !me.unlocked)}
+        ${card('T2', t('t2h'), 'hub_t2', 'unit_sent', '#/t2', 'open_t2', '', '', !me.unlocked)}
       </div><p class="hint" style="margin-top:18px">${t('hub_auto')}</p></div>`;
   };
   redraw(); window.scrollTo(0, 0);
@@ -196,7 +198,8 @@ async function renderT0(){
     app.innerHTML = heroWs(esc(t('t0_eyebrow')), t('t0_title'), esc(t('t0_sub', {i:i + 1, n:items.length})), studentNav('tasks')) + `
     <div class="wrap ws-body"><div class="work">
       <div class="item">
-        ${c.done === items.length ? `<div class="msg ok">${esc(t('t0_done'))}</div>` : ''}
+        ${c.done === items.length ? `<div class="msg ok">${esc(t('t0_done'))} ${esc(t('t0_unlocked'))}
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px"><a class="btn sm primary" href="#/t1">${esc(t('open_t1'))}</a><a class="btn sm primary" href="#/t2">${esc(t('open_t2'))}</a></div></div>` : ''}
         <div class="item-meta"><code class="k">${esc(it.file.split('/').pop())} · ${esc(t('row'))} ${it.row}</code>
           ${it.work ? `<span class="pill t">${esc(it.work)}</span>` : ''}${it.author ? `<span class="pill t">${esc(it.author)}</span>` : ''}</div>
         <div class="ajm ${it.text.length > 300 ? 'long' : ''}" lang="wo-Arab">${esc(it.text)}</div>
@@ -258,7 +261,7 @@ async function renderT0(){
 /* ───────── student: T2 annotate ───────── */
 async function renderT2(){
   const me = await studentShell(); if (!me) return;
-  if (!(me.tasks || []).includes('T2') || !me.ann_id) { location.hash = '#/tasks'; return; }
+  if (!(me.tasks || []).includes('T2') || !me.unlocked) { location.hash = '#/tasks'; return; }
   let items;
   try { items = await studentCall('abjad_t2_list', {}); } catch (e) { return toast(errText(e)); }
   let i = Math.max(0, items.findIndex(x => !x.answer)); if (i < 0) i = 0;
@@ -339,7 +342,7 @@ const SOURCES = ['British Library EAP334', 'Boston University African Ajami Libr
 const wordCount = s => (s || '').trim() ? s.trim().split(/\s+/).length : 0;
 async function renderT1(){
   const me = await studentShell(); if (!me) return;
-  if (!(me.tasks || []).includes('T1') || !me.ann_id) { location.hash = '#/tasks'; return; }
+  if (!(me.tasks || []).includes('T1') || !me.unlocked) { location.hash = '#/tasks'; return; }
   let data;
   try { data = await studentCall('abjad_t1_list', {}); } catch (e) { return toast(errText(e)); }
   const au = data.author;

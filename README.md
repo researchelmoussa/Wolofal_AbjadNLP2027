@@ -30,6 +30,7 @@ Students open **My tasks** (`#/tasks`) from their presentation page.
 | **T2 · Annotate** (`#/t2`) | Sees `annotator_corrected_wolofal_ajami` with its proposed sentiment, then answers **Yes, confirm**, or **No** with the correct sentiment and a reason. | The 8 packs in `stream_b_verification_packs` (618 rows, 538 units). Each student annotates the pack of their `ANN_xx` ID. A 5 % common set (27 units, stratified by sentiment and train/test) goes to all 8 annotators to measure agreement. The units the packs already share stay double-annotated. |
 
 Task status (incomplete → ongoing → completed) now follows the answers automatically.
+**T1 and T2 unlock together, automatically, once the student completes T0.** At that moment the student also gets the first free annotator ID (`ANN_01` … `ANN_08`). The admin can still change it on the Allocation page.
 
 **Admin**
 - **Data & progress** (`#/admin/data`):
