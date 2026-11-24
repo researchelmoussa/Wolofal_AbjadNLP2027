@@ -9,10 +9,10 @@ Object.assign(I18N.en, {
   hub_sub:'Every answer is saved as soon as you give it. You can stop and come back at any time.',
   hub_auto:'Start with Task 0. When it is completed, Tasks 1 and 2 unlock together. Your status in the coordinator’s table changes by itself: <b>incomplete</b> → <b>ongoing</b> after your first answer → <b>completed</b> when your share is done.',
   hub_t0:'Read sentences from the collected native Wolofal corpus and confirm whether each one really is Wolofal. If not, say why.',
-  hub_t1:'Add new passages (50–150 words) by your assigned author, with their source.',
+  hub_t1:'Collect texts by your assigned author: upload PDFs (up to 20), document passages (up to 200), or both.',
   hub_t2:'Check the sentiment proposed for each corrected Wolofal Ajami sentence. Confirm it, or correct it and say why.',
   hub_t1_author:'Your author: <b>{a}</b>', not_assigned_task:'This task is not assigned to you.',
-  open_t0:'Verify →', open_t1:'Add passages →', open_t2:'Annotate →', unit_sent:'sentences', unit_pass:'passages',
+  open_t0:'Verify →', open_t1:'Contribute →', open_t2:'Annotate →', unit_sent:'sentences', unit_pass:'passages',
   locked:'🔒 Unlocks automatically when Task 0 is completed ({d} / {n}). Tasks 1 and 2 open together.',
   t0_unlocked:'Tasks 1 and 2 are now open.',
   no_items:'Nothing has been allocated to you yet. Your coordinator will open this task soon.',
@@ -26,9 +26,15 @@ Object.assign(I18N.en, {
   t0_guide:'Answer <b>Yes</b> if the text is Wolof written in Arabic script, even with spelling variation or a few Arabic words in it. Answer <b>No</b> for Arabic, another language, Latin-script Wolof, OCR noise or text you cannot read. You can come back and change an answer.',
   t0_done:'🎉 You have verified all your sentences. Thank you!', keys:'Keyboard: <b>Y</b> yes · <b>N</b> no · <b>←/→</b> move',
   src:'Source', work:'Work', author:'Author', file:'File', row:'row',
-  t1_eyebrow:'Task 1 · Augment', t1_title:'Passages by <em>{a}</em>', t1_sub:'Your assigned author · target {n} passages of 50–150 words.',
+  t1_eyebrow:'Task 1 · Augment', t1_title:'Texts by <em>{a}</em>', t1_sub:'Two options, use one or both as you like: upload PDFs of the author (up to {p}) or document passages (up to {n}).',
+  t1_tabA:'Upload PDFs', t1_tabB:'Document passages', t1_optA:'Option A · PDFs of the author', t1_optB:'Option B · Passages',
+  t1_pdf_help:'Upload scans or digital copies of works by your author (books, xasida booklets, manuscripts). PDF only, 50 MB maximum per file.',
+  t1_pdf_pick:'Choose PDF files', t1_pdf_rules:'You can still add {n}. Several files at once is fine.', t1_pdf_full:'You have uploaded the maximum of 20 PDFs. Thank you!',
+  t1_uploading:'Uploading {i}/{n}: {f}…', t1_pdf_done:'Upload finished', t1_view:'Open', t1_delpdf_q:'Delete this PDF?',
+  t1_ref_ph:'e.g. Diwan of Samba Diarra Mbaye, p. 12 — or https://…', t1_pass_full:'You have documented the maximum of 200 passages. Thank you!',
+  t1_done_rule:'Task 1 is completed when you reach {p} PDFs or {n} passages.',
   t1_new:'New passage', t1_edit:'Edit passage', t1_passage:'Wolofal passage (Arabic script)', t1_wc:'{n} words', t1_wc_ok:'✓ within 50–150', t1_wc_bad:'must be 50–150',
-  t1_source:'Source collection', t1_ref:'Reference (shelfmark, URL, page)', t1_work:'Poem / work title', t1_doc:'Document ID', t1_genre:'Genre', t1_period:'Period',
+  t1_source:'Source collection', t1_ref:'Book title / link', t1_work:'Poem / work title', t1_doc:'Document ID', t1_genre:'Genre', t1_period:'Period',
   t1_method:'Method', m_manual:'Manual transcription', m_ocr:'OCR, then cleaned', t1_self:'The author’s self-mention (signature) was removed',
   t1_latin:'Latin-script Wolof (optional)', t1_notes:'Notes (optional)', t1_save:'Save passage', t1_cancel:'Cancel edit', t1_dup:'Exact duplicates of a passage already in the database are refused.',
   t1_where:'Where to find passages', t1_mine:'My passages', t1_none:'No passages yet.', t1_del_q:'Delete this passage?', t1_saved:'Passage saved', t1_deleted:'Passage deleted',
@@ -45,16 +51,18 @@ Object.assign(I18N.en, {
   t2_done:'🎉 You have annotated all your items. Thank you!',
   positive:'positive', negative:'negative', neutral:'neutral',
   err_reason_required:'Please give a reason.', err_word_count:'The passage must have 50 to 150 words.', err_duplicate_passage:'This passage is already in the database.',
-  err_no_author:'No author is assigned to you yet.', err_locked:'Complete Task 0 first.', err_not_assigned:'This item is not assigned to you.', err_invalid_sentiment:'Choose a sentiment.',
+  err_no_author:'No author is assigned to you yet.', err_locked:'Complete Task 0 first.', err_reference_required:'Give the book title or a link.',
+  err_passage_limit:'You have reached the maximum of 200 passages.', err_pdf_limit:'You have reached the maximum of 20 PDFs.', err_not_pdf:'not a PDF file',
+  err_too_large:'larger than 50 MB', err_upload_missing:'the upload did not complete, try again', err_not_assigned:'This item is not assigned to you.', err_invalid_sentiment:'Choose a sentiment.',
   /* admin data */
   ad_title:'Collection dashboard', ad_sub:'Live progress of Task 0, Task 1 and Task 2. Exports keep the original file formats.',
   al_title:'Allocation', al_sub:'Link students to annotator IDs, set Task 1 authors and spread the Task 0 sample.',
-  k_t0:'T0 · verified / sample', k_t0cov:'T0 · share of corpus verified', k_t1:'T1 · passages collected', k_t1a:'T1 · authors at target',
+  k_t0:'T0 · verified / sample', k_t0cov:'T0 · share of corpus verified', k_t1:'T1 · passages collected', k_t1a:'T1 · authors done (20 PDFs or 200 passages)',
   k_t2:'T2 · annotations done', k_t2u:'T2 · units covered', k_kappa:'T2 · Fleiss κ (common set)',
   p_t0:'Task 0 · Verify', p_t1:'Task 1 · Augment', p_t2:'Task 2 · Annotate',
   cov_target:'Coverage of the 50 % sample', verdicts:'Verdicts', no_reasons:'Reasons for “No”', by_group:'By group', by_file:'By source file',
   g_author_passages:'Author passages', g_codeswitch:'Code-switched', g_monolingual:'Monolingual lines',
-  per_author:'Passages per author', by_source:'By source', words_total:'{n} words in total',
+  per_author:'Passages per author', by_source:'By source', words_total:'{n} words in total', pdf_per_author:'PDFs per author (max 20)', pdf_list:'Uploaded PDFs', pdf_total:'{n} PDFs · {s}', download:'Download',
   pack_prog:'Progress per pack', changes:'Proposed → annotator (changed)', confirmed_share:'Confirmed', agreement:'Agreement',
   fleiss:'Fleiss κ on the {n} common units ({r} answers)', cohen:'Cohen κ per pair (units shared by two packs)',
   disputed:'Disputed units (agreement below 75 %)', none_yet:'No answers yet.', pair:'Pair', units:'units',
@@ -71,10 +79,10 @@ Object.assign(I18N.fr, {
   hub_sub:'Chaque réponse est enregistrée dès que vous la donnez. Vous pouvez vous arrêter et revenir à tout moment.',
   hub_auto:'Commencez par la tâche 0. Une fois terminée, les tâches 1 et 2 se débloquent en même temps. Votre statut dans le tableau du coordinateur change tout seul : <b>non terminée</b> → <b>en cours</b> après votre première réponse → <b>terminée</b> quand votre part est faite.',
   hub_t0:'Lisez des phrases du corpus wolofal natif collecté et confirmez si chacune est bien du wolofal. Sinon, dites pourquoi.',
-  hub_t1:'Ajoutez de nouveaux passages (50–150 mots) de votre auteur, avec leur source.',
+  hub_t1:'Rassemblez des textes de votre auteur : déposez des PDF (jusqu’à 20), documentez des passages (jusqu’à 200), ou les deux.',
   hub_t2:'Vérifiez le sentiment proposé pour chaque phrase en ajami wolofal corrigée. Confirmez-le, ou corrigez-le et dites pourquoi.',
   hub_t1_author:'Votre auteur : <b>{a}</b>', not_assigned_task:'Cette tâche ne vous est pas assignée.',
-  open_t0:'Vérifier →', open_t1:'Ajouter des passages →', open_t2:'Annoter →', unit_sent:'phrases', unit_pass:'passages',
+  open_t0:'Vérifier →', open_t1:'Contribuer →', open_t2:'Annoter →', unit_sent:'phrases', unit_pass:'passages',
   locked:'🔒 Se débloque automatiquement quand la tâche 0 est terminée ({d} / {n}). Les tâches 1 et 2 s’ouvrent en même temps.',
   t0_unlocked:'Les tâches 1 et 2 sont maintenant ouvertes.',
   no_items:'Rien ne vous a encore été attribué. Votre coordinateur ouvrira bientôt cette tâche.',
@@ -88,9 +96,15 @@ Object.assign(I18N.fr, {
   t0_guide:'Répondez <b>Oui</b> si le texte est du wolof en écriture arabe, même avec des variations d’orthographe ou quelques mots arabes. Répondez <b>Non</b> pour de l’arabe, une autre langue, du wolof en écriture latine, du bruit OCR ou un texte illisible. Vous pouvez revenir modifier une réponse.',
   t0_done:'🎉 Vous avez vérifié toutes vos phrases. Merci !', keys:'Clavier : <b>Y</b> oui · <b>N</b> non · <b>←/→</b> naviguer',
   src:'Source', work:'Œuvre', author:'Auteur', file:'Fichier', row:'ligne',
-  t1_eyebrow:'Tâche 1 · Enrichir', t1_title:'Passages de <em>{a}</em>', t1_sub:'Votre auteur · objectif {n} passages de 50 à 150 mots.',
+  t1_eyebrow:'Tâche 1 · Enrichir', t1_title:'Textes de <em>{a}</em>', t1_sub:'Deux possibilités, à combiner librement : déposer des PDF de l’auteur (jusqu’à {p}) ou documenter des passages (jusqu’à {n}).',
+  t1_tabA:'Déposer des PDF', t1_tabB:'Documenter des passages', t1_optA:'Option A · PDF de l’auteur', t1_optB:'Option B · Passages',
+  t1_pdf_help:'Déposez des scans ou copies numériques d’œuvres de votre auteur (livres, livrets de xasida, manuscrits). PDF uniquement, 50 Mo maximum par fichier.',
+  t1_pdf_pick:'Choisir des fichiers PDF', t1_pdf_rules:'Vous pouvez encore en ajouter {n}. Plusieurs fichiers à la fois, c’est possible.', t1_pdf_full:'Vous avez déposé le maximum de 20 PDF. Merci !',
+  t1_uploading:'Envoi {i}/{n} : {f}…', t1_pdf_done:'Envoi terminé', t1_view:'Ouvrir', t1_delpdf_q:'Supprimer ce PDF ?',
+  t1_ref_ph:'ex. Diwan de Samba Diarra Mbaye, p. 12 — ou https://…', t1_pass_full:'Vous avez documenté le maximum de 200 passages. Merci !',
+  t1_done_rule:'La tâche 1 est terminée quand vous atteignez {p} PDF ou {n} passages.',
   t1_new:'Nouveau passage', t1_edit:'Modifier le passage', t1_passage:'Passage en wolofal (écriture arabe)', t1_wc:'{n} mots', t1_wc_ok:'✓ entre 50 et 150', t1_wc_bad:'doit faire 50 à 150 mots',
-  t1_source:'Collection source', t1_ref:'Référence (cote, URL, page)', t1_work:'Titre du poème / de l’œuvre', t1_doc:'ID du document', t1_genre:'Genre', t1_period:'Période',
+  t1_source:'Collection source', t1_ref:'Titre du livre / lien', t1_work:'Titre du poème / de l’œuvre', t1_doc:'ID du document', t1_genre:'Genre', t1_period:'Période',
   t1_method:'Méthode', m_manual:'Transcription manuelle', m_ocr:'OCR puis nettoyage', t1_self:'La mention de l’auteur (signature) a été retirée',
   t1_latin:'Wolof en écriture latine (facultatif)', t1_notes:'Notes (facultatif)', t1_save:'Enregistrer le passage', t1_cancel:'Annuler la modification', t1_dup:'Les doublons exacts d’un passage déjà enregistré sont refusés.',
   t1_where:'Où trouver des passages', t1_mine:'Mes passages', t1_none:'Aucun passage pour l’instant.', t1_del_q:'Supprimer ce passage ?', t1_saved:'Passage enregistré', t1_deleted:'Passage supprimé',
@@ -107,15 +121,17 @@ Object.assign(I18N.fr, {
   t2_done:'🎉 Vous avez annoté tous vos éléments. Merci !',
   positive:'positif', negative:'négatif', neutral:'neutre',
   err_reason_required:'Merci d’indiquer une raison.', err_word_count:'Le passage doit compter 50 à 150 mots.', err_duplicate_passage:'Ce passage est déjà enregistré.',
-  err_no_author:'Aucun auteur ne vous est encore assigné.', err_locked:'Terminez d’abord la tâche 0.', err_not_assigned:'Cet élément ne vous est pas assigné.', err_invalid_sentiment:'Choisissez un sentiment.',
+  err_no_author:'Aucun auteur ne vous est encore assigné.', err_locked:'Terminez d’abord la tâche 0.', err_reference_required:'Indiquez le titre du livre ou un lien.',
+  err_passage_limit:'Vous avez atteint le maximum de 200 passages.', err_pdf_limit:'Vous avez atteint le maximum de 20 PDF.', err_not_pdf:'ce n’est pas un PDF',
+  err_too_large:'plus de 50 Mo', err_upload_missing:'l’envoi n’a pas abouti, réessayez', err_not_assigned:'Cet élément ne vous est pas assigné.', err_invalid_sentiment:'Choisissez un sentiment.',
   ad_title:'Tableau de bord de la collecte', ad_sub:'Avancement en direct des tâches 0, 1 et 2. Les exports gardent le format des fichiers d’origine.',
   al_title:'Répartition', al_sub:'Associez les étudiants aux identifiants d’annotateur, fixez les auteurs de la tâche 1 et répartissez l’échantillon de la tâche 0.',
-  k_t0:'T0 · vérifiés / échantillon', k_t0cov:'T0 · part du corpus vérifiée', k_t1:'T1 · passages collectés', k_t1a:'T1 · auteurs à l’objectif',
+  k_t0:'T0 · vérifiés / échantillon', k_t0cov:'T0 · part du corpus vérifiée', k_t1:'T1 · passages collectés', k_t1a:'T1 · auteurs terminés (20 PDF ou 200 passages)',
   k_t2:'T2 · annotations faites', k_t2u:'T2 · unités couvertes', k_kappa:'T2 · κ de Fleiss (lot commun)',
   p_t0:'Tâche 0 · Vérifier', p_t1:'Tâche 1 · Enrichir', p_t2:'Tâche 2 · Annoter',
   cov_target:'Couverture de l’échantillon de 50 %', verdicts:'Verdicts', no_reasons:'Raisons des « Non »', by_group:'Par groupe', by_file:'Par fichier source',
   g_author_passages:'Passages d’auteurs', g_codeswitch:'Alternance codique', g_monolingual:'Lignes monolingues',
-  per_author:'Passages par auteur', by_source:'Par source', words_total:'{n} mots au total',
+  per_author:'Passages par auteur', by_source:'Par source', words_total:'{n} mots au total', pdf_per_author:'PDF par auteur (max 20)', pdf_list:'PDF déposés', pdf_total:'{n} PDF · {s}', download:'Télécharger',
   pack_prog:'Avancement par lot', changes:'Proposé → annotateur (modifiés)', confirmed_share:'Confirmés', agreement:'Accord',
   fleiss:'κ de Fleiss sur les {n} unités communes ({r} réponses)', cohen:'κ de Cohen par paire (unités partagées par deux lots)',
   disputed:'Unités en désaccord (accord inférieur à 75 %)', none_yet:'Pas encore de réponses.', pair:'Paire', units:'unités',
@@ -164,8 +180,10 @@ async function renderTasksHub(){
       const p = me[k], on = mine.includes(k);
       return `<div class="card task-card ${on ? 'mine' : 'off'}"><div class="tag">${esc(t('tn' + k.slice(1)))}</div><h3>${esc(title)}</h3>
         <p>${t(txt)}${extra ? '<br>' + extra : ''}</p>
-        ${on && !blocked ? `<div class="pnum">${fmtN(p.done)} / ${fmtN(p.total)} ${esc(t(unit))} <span>${pct(p.done, p.total)}%</span></div><div class="bar ${cls}"><i style="width:${pct(p.done, p.total)}%"></i></div>
-          <a class="btn primary" href="${href}">${esc(t(btn))}</a>` : `<p class="hint">${esc(on ? t('locked', {d:fmtN(me.T0.done), n:fmtN(me.T0.total)}) : t('not_assigned_task'))}</p>`}</div>`;
+        ${on && !blocked ? (k === 'T1'
+            ? `<div class="pnum">📄 ${p.pdfs} / ${p.pdf_max} PDF · ✍️ ${fmtN(p.done)} / ${fmtN(p.total)} ${esc(t(unit))} <span>${t1Pct(p)}%</span></div><div class="bar ${cls}"><i style="width:${t1Pct(p)}%"></i></div>`
+            : `<div class="pnum">${fmtN(p.done)} / ${fmtN(p.total)} ${esc(t(unit))} <span>${pct(p.done, p.total)}%</span></div><div class="bar ${cls}"><i style="width:${pct(p.done, p.total)}%"></i></div>`)
+          + `<a class="btn primary" href="${href}">${esc(t(btn))}</a>` : `<p class="hint">${esc(on ? t('locked', {d:fmtN(me.T0.done), n:fmtN(me.T0.total)}) : t('not_assigned_task'))}</p>`}</div>`;
     };
     app.innerHTML = heroWs(esc(t('hub_eyebrow')), t('hub_title', {name:esc(name)}), esc(t('hub_sub')), studentNav('tasks')) +
       `<div class="wrap ws-body"><div class="hub">
@@ -337,85 +355,130 @@ async function renderT2(){
   redraw(); window.scrollTo(0, 0);
 }
 
-/* ───────── student: T1 augment ───────── */
-const SOURCES = ['British Library EAP334', 'Boston University African Ajami Library', 'Printed Xasida booklet', 'Other'];
+/* ───────── student: T1 augment (two options: PDFs and/or passages) ───────── */
+const FN_PDF = `${SUPABASE_URL}/functions/v1/abjad-t1-pdf`;
+async function pdfCall(body){
+  const r = await fetch(FN_PDF, {method:'POST', headers:{'Content-Type':'application/json', apikey:SUPABASE_KEY}, body:JSON.stringify(body)});
+  let d = {}; try { d = await r.json(); } catch {}
+  if (!r.ok) { const e = new Error(d.message || `Request failed (${r.status})`); e.code = d.message; throw e; }
+  return d;
+}
+async function openPdf(token, id){
+  const w = window.open('', '_blank');
+  try { const {url} = await pdfCall({action:'sign', token, id}); if (w) w.location = url; else location.href = url; }
+  catch (e) { if (w) w.close(); toast(errText(e)); }
+}
+const fmtSize = b => b >= 1048576 ? (b / 1048576).toFixed(1) + ' MB' : Math.max(1, Math.round(b / 1024)) + ' KB';
 const wordCount = s => (s || '').trim() ? s.trim().split(/\s+/).length : 0;
+const t1Pct = p => Math.min(100, Math.max(pct(p.done, p.total), pct(p.pdfs || 0, p.pdf_max || 20)));
 async function renderT1(){
   const me = await studentShell(); if (!me) return;
   if (!(me.tasks || []).includes('T1') || !me.unlocked) { location.hash = '#/tasks'; return; }
   let data;
   try { data = await studentCall('abjad_t1_list', {}); } catch (e) { return toast(errText(e)); }
-  const au = data.author;
-  let editing = null; // passage being edited
-  let form = {};      // unsaved form values survive a language switch
-  const readForm = () => { if (!$('#t1form')) return; form = Object.fromEntries($$('#t1form [name]').map(el => [el.name, el.type === 'checkbox' ? (el.checked ? 'Yes' : 'No') : el.value])); };
+  const au = data.author, PMAX = data.pdf_max || 20;
+  let tab = store.get('wol_t1tab') || 'pdf', editing = null, form = {}, busy = '';
+  const readForm = () => { if ($('#t1form')) form = {wolofal_passage:$('#t1p').value, reference:$('#t1ref').value}; };
   redraw = () => {
     if (!au) {
       app.innerHTML = heroWs(esc(t('t1_eyebrow')), t('t1h'), '', studentNav('tasks')) + `<div class="wrap ws-body"><div class="empty-state">${esc(t('err_no_author'))}</div></div>`;
       return;
     }
-    const f = {doc_id:'DOC01', source_collection:SOURCES[0], method:'manual', self_mention_removed:'No', ...form};
-    const wc = wordCount(f.wolofal_passage), ok = wc >= 50 && wc <= 150;
-    const ps = data.passages;
-    app.innerHTML = heroWs(esc(t('t1_eyebrow')), t('t1_title', {a:esc(au.author_name)}), esc(t('t1_sub', {n:au.target})), studentNav('tasks')) + `
-    <div class="wrap ws-body"><div class="work">
-      <form class="item" id="t1form" autocomplete="off">
-        <div class="kicker">${esc(editing ? t('t1_edit') : t('t1_new'))} · ${esc(au.author_id)}</div>
+    const ps = data.passages, fs = data.pdfs, target = au.target;
+    const f = {...form}, wc = wordCount(f.wolofal_passage), ok = wc >= 50 && wc <= 150;
+    const pdfPane = `
+      <div class="kicker">${esc(t('t1_optA'))} · ${fs.length} / ${PMAX}</div>
+      <p class="hint" style="margin-top:0">${esc(t('t1_pdf_help'))}</p>
+      ${fs.length < PMAX ? `<label class="drop" for="t1files"><input id="t1files" type="file" accept="application/pdf,.pdf" multiple hidden>
+        <b>${esc(t('t1_pdf_pick'))}</b><span>${esc(t('t1_pdf_rules', {n:PMAX - fs.length}))}</span></label>` : `<div class="msg ok">${esc(t('t1_pdf_full'))}</div>`}
+      ${busy ? `<div class="msg ok" id="t1busy">${esc(busy)}</div>` : ''}
+      ${fs.length ? `<div class="plist" style="margin-top:14px"><table><tbody>${fs.map(x => `<tr>
+        <td>📄 ${esc(x.file_name)}</td><td class="hint">${fmtSize(x.size_bytes)}</td>
+        <td style="white-space:nowrap"><button class="btn sm" type="button" data-view="${x.id}">${esc(t('t1_view'))}</button> <button class="btn sm danger" type="button" data-delpdf="${x.id}">✕</button></td></tr>`).join('')}</tbody></table></div>` : ''}`;
+    const passPane = `
+      <form id="t1form" autocomplete="off">
+        <div class="kicker">${esc(t('t1_optB'))} · ${ps.length} / ${target} ${editing ? '· ' + esc(t('t1_edit')) : ''}</div>
+        ${!editing && ps.length >= target ? `<div class="msg ok">${esc(t('t1_pass_full'))}</div>` : `
         <div class="field"><label for="t1p">${esc(t('t1_passage'))}</label>
-          <textarea id="t1p" name="wolofal_passage" class="ajami-in" dir="rtl" lang="wo-Arab" required>${esc(f.wolofal_passage || '')}</textarea>
+          <textarea id="t1p" class="ajami-in" dir="rtl" lang="wo-Arab" required>${esc(f.wolofal_passage || '')}</textarea>
           <div class="wc ${wc ? (ok ? 'ok' : 'bad') : ''}" id="t1wc">${esc(t('t1_wc', {n:wc}))} · ${esc(ok ? t('t1_wc_ok') : t('t1_wc_bad'))}</div></div>
-        <div class="grid2">
-          <div class="field"><label>${esc(t('t1_source'))}</label><select name="source_collection">${SOURCES.map(s => `<option${f.source_collection === s ? ' selected' : ''}>${esc(s)}</option>`).join('')}</select></div>
-          <div class="field"><label>${esc(t('t1_ref'))}</label><input name="reference" value="${esc(f.reference || '')}" required></div>
-          <div class="field"><label>${esc(t('t1_work'))}</label><input name="work_title" value="${esc(f.work_title || '')}"></div>
-          <div class="field"><label>${esc(t('t1_doc'))}</label><input name="doc_id" value="${esc(f.doc_id)}" pattern="[A-Za-z0-9_\\-]{1,20}"></div>
-          <div class="field"><label>${esc(t('t1_genre'))}</label><input name="genre" list="t1genres" value="${esc(f.genre || '')}"></div>
-          <div class="field"><label>${esc(t('t1_period'))}</label><input name="period" list="t1periods" value="${esc(f.period || '')}"></div>
-          <div class="field"><label>${esc(t('t1_method'))}</label><select name="method"><option value="manual"${f.method === 'manual' ? ' selected' : ''}>${esc(t('m_manual'))}</option><option value="ocr"${f.method === 'ocr' ? ' selected' : ''}>${esc(t('m_ocr'))}</option></select></div>
-          <div class="field" style="display:flex;align-items:end"><div class="checks"><label><input type="checkbox" name="self_mention_removed"${f.self_mention_removed === 'Yes' ? ' checked' : ''}> ${esc(t('t1_self'))}</label></div></div>
-        </div>
-        <datalist id="t1genres"><option>Poetry</option><option>Manual_Prose</option><option>Religious_Didactic</option><option>Biography</option><option>Prose</option></datalist>
-        <datalist id="t1periods"><option>19th_Century</option><option>20th_Century</option><option>21st_Century</option></datalist>
-        <div class="field"><label>${esc(t('t1_latin'))}</label><textarea name="wolof_latin_optional" style="min-height:70px;font-family:inherit">${esc(f.wolof_latin_optional || '')}</textarea></div>
-        <div class="field"><label>${esc(t('t1_notes'))}</label><input name="notes" value="${esc(f.notes || '')}"></div>
+        <div class="field"><label for="t1ref">${esc(t('t1_ref'))} <span class="hint">${esc(t('required'))}</span></label>
+          <input id="t1ref" value="${esc(f.reference || '')}" required placeholder="${esc(t('t1_ref_ph'))}"></div>
         <div class="nav-row"><span class="hint">${esc(t('t1_dup'))}</span><span style="display:flex;gap:8px">
           ${editing ? `<button class="btn" type="button" id="t1cancel">${esc(t('t1_cancel'))}</button>` : ''}
-          <button class="btn primary" type="submit">${esc(t('t1_save'))}</button></span></div>
-      </form>
+          <button class="btn primary" type="submit">${esc(t('t1_save'))}</button></span></div>`}
+      </form>`;
+    app.innerHTML = heroWs(esc(t('t1_eyebrow')), t('t1_title', {a:esc(au.author_name)}), esc(t('t1_sub', {p:PMAX, n:target})), studentNav('tasks')) + `
+    <div class="wrap ws-body"><div class="work">
+      <div class="item">
+        <div class="seg" role="tablist"><button type="button" data-tab="pdf" class="${tab === 'pdf' ? 'on' : ''}">📄 ${esc(t('t1_tabA'))} <small>${fs.length}/${PMAX}</small></button>
+          <button type="button" data-tab="pass" class="${tab === 'pass' ? 'on' : ''}">✍️ ${esc(t('t1_tabB'))} <small>${ps.length}/${target}</small></button></div>
+        ${tab === 'pdf' ? pdfPane : passPane}
+      </div>
       <div class="side">
-        ${progressCard(ps.length, au.target, 'gold')}
+        <div class="card"><h3>${esc(t('my_progress'))}</h3>
+          <div class="pnum">📄 PDF <span>${fs.length} / ${PMAX}</span></div><div class="bar gold"><i style="width:${pct(fs.length, PMAX)}%"></i></div>
+          <div class="pnum">✍️ ${esc(t('unit_pass'))} <span>${ps.length} / ${target}</span></div><div class="bar gold"><i style="width:${pct(ps.length, target)}%"></i></div>
+          <p class="hint" style="margin:10px 0 0">${esc(t('t1_done_rule', {p:PMAX, n:target}))}</p></div>
         <div class="card"><h3>${esc(t('t1_where'))}</h3>
           <div class="ref"><strong>${esc(t('s_eap'))}</strong><span>${esc(t('s_eap_d'))}</span></div>
           <div class="ref"><strong>${esc(t('s_bu'))}</strong><span>${esc(t('s_bu_d'))}</span></div>
           <div class="ref"><strong>${esc(t('s_bk'))}</strong><span>${esc(t('s_bk_d'))}</span></div>
           ${au.primary_sources ? `<div class="ref"><strong>${esc(t('s_roster'))}</strong><span>${esc(au.primary_sources)}</span></div>` : ''}</div>
-        <div class="card"><h3>${esc(t('t1_mine'))} (${ps.length})</h3>${ps.length ? `<div class="plist"><table><tbody>${ps.map((p, k) => `
-          <tr><td>#${ps.length - k}</td><td>${p.word_count} w</td><td class="hint">${esc((p.reference || p.source_collection || '').slice(0, 26))}</td>
+        ${tab === 'pass' ? `<div class="card"><h3>${esc(t('t1_mine'))} (${ps.length})</h3>${ps.length ? `<div class="plist"><table><tbody>${ps.map((p, k) => `
+          <tr><td>#${ps.length - k}</td><td>${p.word_count} w</td><td class="hint">${esc((p.reference || '').slice(0, 28))}</td>
           <td style="white-space:nowrap"><button class="btn sm" type="button" data-edit="${p.id}">✎</button> <button class="btn sm danger" type="button" data-del="${p.id}">✕</button></td></tr>`).join('')}</tbody></table></div>`
-          : `<p class="hint" style="margin:0">${esc(t('t1_none'))}</p>`}</div>
+          : `<p class="hint" style="margin:0">${esc(t('t1_none'))}</p>`}</div>` : ''}
       </div></div></div>`;
-    $('#t1p').addEventListener('input', e => {
+    $('#t1p')?.addEventListener('input', e => {
       const n = wordCount(e.target.value), good = n >= 50 && n <= 150, el = $('#t1wc');
       el.className = 'wc ' + (n ? (good ? 'ok' : 'bad') : ''); el.textContent = `${t('t1_wc', {n})} · ${good ? t('t1_wc_ok') : t('t1_wc_bad')}`;
     });
-    $('#t1form').addEventListener('input', readForm);
-    $('#t1form').addEventListener('submit', async e => {
+    $('#t1form')?.addEventListener('input', readForm);
+    $('#t1form')?.addEventListener('submit', async e => {
       e.preventDefault(); readForm();
       const n = wordCount(form.wolofal_passage); if (n < 50 || n > 150) return toast(t('err_word_count'));
+      if (!form.reference.trim()) return toast(t('err_reference_required'));
       const btn = e.submitter; btn.disabled = true;
       try {
         const r = await studentCall('abjad_t1_save', {p_id:editing ? editing.id : null, p_row:form});
         if (editing) data.passages = data.passages.map(p => p.id === r.id ? r : p); else data.passages.unshift(r);
-        editing = null; form = {doc_id:form.doc_id, source_collection:form.source_collection, reference:form.reference, work_title:form.work_title, genre:form.genre, period:form.period, method:form.method};
-        toast(t('t1_saved')); redraw();
+        editing = null; form = {reference:form.reference}; toast(t('t1_saved')); redraw();
       } catch (err) { toast(errText(err)); } finally { btn.disabled = false; }
     });
+    $('#t1files')?.addEventListener('change', e => uploadPdfs([...e.target.files]));
   };
+  async function uploadPdfs(files){
+    const token = store.get('wol_student');
+    files = files.slice(0, PMAX - data.pdfs.length);
+    for (const [k, file] of files.entries()) {
+      if (!/\.pdf$/i.test(file.name) && file.type !== 'application/pdf') { toast(`${file.name}: ${t('err_not_pdf')}`); continue; }
+      if (file.size > 50 * 1048576) { toast(`${file.name}: ${t('err_too_large')}`); continue; }
+      busy = t('t1_uploading', {i:k + 1, n:files.length, f:file.name}); redraw();
+      try {
+        const s = await pdfCall({action:'start', token, name:file.name, size:file.size});
+        const fd = new FormData(); fd.append('cacheControl', '3600'); fd.append('', file);
+        const up = await fetch(s.url, {method:'PUT', headers:{'x-upsert':'false'}, body:fd});
+        if (!up.ok) throw new Error((await up.text()) || `Upload failed (${up.status})`);
+        const row = await pdfCall({action:'finish', token, path:s.path, name:file.name});
+        data.pdfs.unshift(row);
+      } catch (e) { toast(`${file.name}: ${errText(e)}`); }
+    }
+    busy = ''; redraw(); toast(t('t1_pdf_done'));
+  }
   app.onclick = async e => {
     const b = e.target.closest('button'); if (!b) return;
+    if (b.dataset.tab) { tab = b.dataset.tab; store.set('wol_t1tab', tab); readForm(); return redraw(); }
     if (b.id === 't1cancel') { editing = null; form = {}; return redraw(); }
+    if (b.dataset.view) return openPdf(store.get('wol_student'), Number(b.dataset.view));
+    if (b.dataset.delpdf) {
+      if (!confirm(t('t1_delpdf_q'))) return;
+      try { await pdfCall({action:'delete', token:store.get('wol_student'), id:Number(b.dataset.delpdf)}); data.pdfs = data.pdfs.filter(x => String(x.id) !== b.dataset.delpdf); toast(t('t1_deleted')); redraw(); }
+      catch (err) { toast(errText(err)); }
+      return;
+    }
     if (b.dataset.edit) {
-      editing = data.passages.find(p => String(p.id) === b.dataset.edit); form = {...editing};
+      editing = data.passages.find(p => String(p.id) === b.dataset.edit); form = {wolofal_passage:editing.wolofal_passage, reference:editing.reference};
       redraw(); window.scrollTo({top:0, behavior:'smooth'}); return;
     }
     if (b.dataset.del) {
@@ -514,11 +577,15 @@ async function buildExport(task){
     return {files, json};
   }
   if (task === 'T1') {
-    const header = ['passage_id','annotator_id','author_id','author_name','work_title','doc_id','genre','period','word_count','self_mention_removed','wolofal_passage','wolof_latin_optional','notes','source_collection','reference','method','created_at'];
+    const header = ['passage_id','annotator_id','author_id','author_name','word_count','wolofal_passage','reference','created_at'];
     const seq = {};
-    const rows = raw.map(p => { const k = p.author_id + '_' + p.doc_id; seq[k] = (seq[k] || 0) + 1;
-      return {...p, annotator_id:p.ann_id, passage_id:`${k}_${String(seq[k]).padStart(3, '0')}`, method:p.method === 'ocr' ? 'OCR + cleaning' : 'Manual transcription'}; });
-    return {files:[{name:'T1_augment/stream_a_author_passages.csv', text:toCsv(header, rows)}], json:rows.map(r => Object.fromEntries(header.map(h => [h, r[h]])))};
+    const rows = raw.map(p => { seq[p.author_id] = (seq[p.author_id] || 0) + 1;
+      return {...p, annotator_id:p.ann_id, passage_id:`${p.author_id}_P${String(seq[p.author_id]).padStart(3, '0')}`}; });
+    const pdfs = await adminCall('abjad_admin_t1_pdfs', {});
+    const ph = ['pdf_id','annotator_id','author_id','author_name','student','file_name','size_bytes','uploaded_at'];
+    const prow = pdfs.map(f => ({pdf_id:f.id, annotator_id:f.ann_id, author_id:f.author_id, author_name:f.author_name, student:f.student, file_name:f.file_name, size_bytes:f.size_bytes, uploaded_at:f.created_at}));
+    return {files:[{name:'T1_augment/stream_a_author_passages.csv', text:toCsv(header, rows)}, {name:'T1_augment/pdf_uploads.csv', text:toCsv(ph, prow)}],
+      json:{passages:rows.map(r => Object.fromEntries(header.map(h => [h, r[h]]))), pdfs:prow}};
   }
   // T2
   const extra = ['sentiment_confirmed', 'iaa_scope', 'annotated_at'];
@@ -580,11 +647,14 @@ const ago = d => {
 async function renderAdminData(){
   if (!await adminShell()) return;
   let S;
-  try { S = await adminCall('abjad_admin_task_stats', {}); } catch (e) { return toast(e.message); }
+  let PDFS = [];
+  try { [S, PDFS] = await Promise.all([adminCall('abjad_admin_task_stats', {}), adminCall('abjad_admin_t1_pdfs', {})]); } catch (e) { return toast(e.message); }
   const ag = agreementStats(S.t2.iaa);
+  const pdfPer = {}; PDFS.forEach(f => pdfPer[f.ann_id] = (pdfPer[f.ann_id] || 0) + 1);
+  const pdfBytes = PDFS.reduce((n, f) => n + Number(f.size_bytes), 0);
   redraw = () => {
     const t0 = S.t0, t1 = S.t1, t2 = S.t2;
-    const atTarget = t1.authors.filter(a => a.done >= a.target).length, t1target = t1.authors.reduce((s, a) => s + a.target, 0);
+    const atTarget = t1.authors.filter(a => a.done >= a.target || (pdfPer[a.ann_id] || 0) >= 20).length, t1target = t1.authors.reduce((s, a) => s + a.target, 0);
     const expBtns = k => `<span class="exp"><button class="btn sm" type="button" data-exp="${k}" data-kind="csv">${esc(t('exp_csv'))}</button><button class="btn sm" type="button" data-exp="${k}" data-kind="json">${esc(t('exp_json'))}</button></span>`;
     const reasons = Object.entries(t0.reasons).sort((a, b) => b[1] - a[1]);
     const changes = Object.entries(t2.changes).sort((a, b) => b[1] - a[1]);
@@ -616,8 +686,11 @@ async function renderAdminData(){
         <div class="panel"><h3>${esc(t('p_t1'))} ${expBtns('T1')}</h3>
           <div class="pnum">${esc(t('per_author'))} <span>${esc(t('words_total', {n:fmtN(t1.words)}))}</span></div>
           ${t1.authors.map(a => hbar(`${a.ann_id} · ${a.author_name}`, a.done, a.target, 'gold', `${a.done}/${a.target}`)).join('')}
-          <div class="sub-h">${esc(t('by_source'))}</div>
-          ${Object.keys(t1.sources).length ? Object.entries(t1.sources).sort((a, b) => b[1] - a[1]).map(([k, n]) => hbar(k, n, t1.total)).join('') : `<p class="hint">${esc(t('none_yet'))}</p>`}
+          <div class="sub-h">${esc(t('pdf_per_author'))} · ${esc(t('pdf_total', {n:PDFS.length, s:fmtSize(pdfBytes)}))}</div>
+          ${t1.authors.map(a => hbar(`${a.ann_id} · ${a.author_name}`, pdfPer[a.ann_id] || 0, 20, 'gold', `${pdfPer[a.ann_id] || 0}/20`)).join('')}
+          <div class="sub-h">${esc(t('pdf_list'))}</div>
+          ${PDFS.length ? `<div class="plist"><table class="disp"><tbody>${PDFS.map(f => `<tr><td><code class="k">${esc(f.ann_id)}</code></td><td title="${esc(f.student)}">📄 ${esc(f.file_name)}</td><td class="sub">${fmtSize(f.size_bytes)}</td>
+            <td><button class="btn sm" type="button" data-pdf="${f.id}">${esc(t('download'))}</button></td></tr>`).join('')}</tbody></table></div>` : `<p class="hint">${esc(t('none_yet'))}</p>`}
         </div>
         <div class="panel"><h3>${esc(t('p_t2'))} ${expBtns('T2')}</h3>
           <div class="pnum">${esc(t('k_t2u'))} <span>${fmtN(t2.units_done)} / ${fmtN(t2.units)}</span></div><div class="bar"><i style="width:${pct(t2.units_done, t2.units)}%"></i></div>
@@ -648,7 +721,10 @@ async function renderAdminData(){
             <td class="gl"><span class="bar mini-bar"><i style="width:${pct(s.T2.done, s.T2.total)}%"></i></span>${s.T2.done}/${s.T2.total}</td><td class="sub">${esc(ago(s.last))}</td></tr>`; }).join('')}</tbody></table></div></div>
     </div>`;
   };
-  app.onclick = e => { const b = e.target.closest('button[data-exp]'); if (b) exportTask(b.dataset.exp, b.dataset.kind); };
+  app.onclick = e => {
+    const p = e.target.closest('button[data-pdf]'); if (p) return openPdf(store.get('wol_admin'), Number(p.dataset.pdf));
+    const b = e.target.closest('button[data-exp]'); if (b) exportTask(b.dataset.exp, b.dataset.kind);
+  };
   redraw(); window.scrollTo(0, 0);
 }
 

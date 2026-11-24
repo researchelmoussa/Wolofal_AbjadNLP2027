@@ -26,7 +26,7 @@ Students open **My tasks** (`#/tasks`) from their presentation page.
 | Task | What the student does | Data |
 | --- | --- | --- |
 | **T0 · Verify** (`#/t0`) | Says whether each sentence is Wolofal: **Yes**, or **No** with a reason (preset reasons plus free text). | The 4,961 rows of the 7 CSVs in `01_collected_data/stream_a_native_wolofal` hold 4,354 distinct texts. Each distinct text is verified once. A random 50 % of each group (author passages, code-switched, monolingual) forms the 2,177-text sample, which is split evenly over the students with T0, with no overlap. |
-| **T1 · Augment** (`#/t1`) | Adds passages of 50–150 words by their assigned author, with source collection and reference. The target is 200. Exact duplicates are refused. | Authors come from `author_assignments_roster.csv` (author 1 of each `ANN_xx`), and the admin can change them. |
+| **T1 · Augment** (`#/t1`) | Two options the student can mix: **upload PDFs** of their author's works (up to 20, 50 MB each), and/or **document passages** (up to 200, 50–150 words) with only a required book title or link. T1 is completed at 20 PDFs or 200 passages. Exact duplicate passages are refused. | Authors come from `author_assignments_roster.csv` (author 1 of each `ANN_xx`), and the admin can change them. PDFs go into the private Storage bucket `abjad-t1-pdfs` through the Edge Function `supabase/functions/abjad-t1-pdf`, which checks the portal session. Admins download them from Data & progress. |
 | **T2 · Annotate** (`#/t2`) | Sees `annotator_corrected_wolofal_ajami` with its proposed sentiment, then answers **Yes, confirm**, or **No** with the correct sentiment and a reason. | The 8 packs in `stream_b_verification_packs` (618 rows, 538 units). Each student annotates the pack of their `ANN_xx` ID. A 5 % common set (27 units, stratified by sentiment and train/test) goes to all 8 annotators to measure agreement. The units the packs already share stay double-annotated. |
 
 Task status (incomplete → ongoing → completed) now follows the answers automatically.
@@ -39,7 +39,7 @@ Task status (incomplete → ongoing → completed) now follows the answers autom
   - a per-student table.
 - **Exports** (CSV and JSON for each task, or one ZIP with everything). Original columns and rows are kept, and answers are added:
   - **T0:** each of the 7 CSVs gains `verified`, `verified_why`, `verified_by`, `verified_at` and `in_verification_sample`.
-  - **T1:** the `stream_a_author_passages.csv` layout, plus source, reference and method.
+  - **T1:** `stream_a_author_passages.csv` (passage, word count, book title / link) and `pdf_uploads.csv` (list of uploaded PDFs).
   - **T2:** each pack with `annotator_verified_sentiment` and `annotator_notes` filled in, plus `sentiment_confirmed`, `iaa_scope` and `annotated_at`; also `T2_common_set_all_annotators.csv`.
 - **Allocation** (`#/admin/alloc`):
   - link each student to an `ANN_xx` ID; T1 and T2 follow this ID;
