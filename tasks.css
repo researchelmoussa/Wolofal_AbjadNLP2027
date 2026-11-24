@@ -92,3 +92,8 @@ textarea.ajami-in{direction:rtl;font-family:"Noto Kufi Arabic",sans-serif;font-s
 .drop:hover{border-color:var(--teal)}
 .drop b{color:var(--deep);font-size:1rem}
 .drop span{color:var(--muted);font-size:.82rem;font-weight:500}
+.step{display:flex;align-items:center;gap:10px;margin:22px 0 12px;padding-top:18px;border-top:1px solid var(--line)}
+.item-meta + .step{border-top:0;padding-top:0;margin-top:0}
+.step h3{margin:0;font-size:1.05rem}
+.step-n{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:99px;background:var(--deep);color:#fff;font-weight:700;font-size:.85rem;flex:none}
+.fr-src{background:#fff;border:1px solid var(--line);border-left:4px solid var(--gold);border-radius:12px;padding:14px 16px;margin-bottom:14px;font-size:1.02rem;color:var(--ink)}

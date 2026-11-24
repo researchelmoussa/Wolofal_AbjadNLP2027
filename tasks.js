@@ -10,7 +10,11 @@ Object.assign(I18N.en, {
   hub_auto:'Start with Task 0. When it is completed, Tasks 1 and 2 unlock together. Your status in the coordinator’s table changes by itself: <b>incomplete</b> → <b>ongoing</b> after your first answer → <b>completed</b> when your share is done.',
   hub_t0:'Read sentences from the collected native Wolofal corpus and confirm whether each one really is Wolofal. If not, say why.',
   hub_t1:'Collect texts by your assigned author: upload PDFs (up to 20), document passages (up to 200), or both.',
-  hub_t2:'Check the sentiment proposed for each corrected Wolofal Ajami sentence. Confirm it, or correct it and say why.',
+  hub_t2:'For each sentence: 1. check the French → Wolofal translation and edit it if needed; 2. check that the sentiment is preserved.',
+  t2_s1:'Translation', t2_s2:'Sentiment preserved', t2_q1:'Is the Wolofal translation of the French sentence correct?', yes_correct:'✓ Yes, correct', no_fix:'✕ No, I correct it',
+  t2_fix:'Corrected Wolofal translation', t2_q2:'Does the Wolofal translation keep this sentiment?', yes_kept:'✓ Yes, preserved', proposed:'proposed',
+  t2_note:'Comment (optional)', t2_guide_tr:'<b>Translation:</b> answer Yes if the Wolofal says the same thing as the French and reads naturally. Otherwise edit the Wolofal text directly.',
+  err_answer_both_steps:'Answer both steps: translation and sentiment.', err_translation_unchanged:'Edit the Wolofal translation, or answer Yes if it is correct.',
   hub_t1_author:'Your author: <b>{a}</b>', not_assigned_task:'This task is not assigned to you.',
   open_t0:'Verify →', open_t1:'Contribute →', open_t2:'Annotate →', unit_sent:'sentences', unit_pass:'passages',
   locked:'🔒 Unlocks automatically when Task 0 is completed ({d} / {n}). Tasks 1 and 2 open together.',
@@ -42,10 +46,10 @@ Object.assign(I18N.en, {
   s_bu:'Boston University African Ajami Library', s_bu_d:'Digitised manuscripts not yet in Zenodo 20392539 (e.g. Samba Diarra Mbaye, Sokhna Maïmouna Mbacké)',
   s_bk:'Senegalese printed Xasida booklets', s_bk_d:'Dakar, Touba, Tivaouane, Kaolack — transcribe / OCR-clean stanzas of 50–150 words',
   s_roster:'Suggested for your author', s_other:'Other source',
-  t2_eyebrow:'Task 2 · Annotate', t2_title:'Is the <em>sentiment</em> right?', t2_sub:'Item {i} of your {n} · verification pack {ann}.',
-  t2_lbl:'Corrected Wolofal Ajami', t2_prop:'Proposed sentiment:', t2_q:'Do you confirm this sentiment?', yes_conf:'✓ Yes, confirm',
-  t2_correct:'Correct sentiment', t2_why:'Why?', ph_t2why:'e.g. descriptive sentence, no praise or complaint',
-  t2_ctx:'Show context (French gloss, Latin Wolof, Arabic source)', ctx_fr:'French', ctx_lat:'Latin Wolof', ctx_msa:'Arabic (MSA)',
+  t2_eyebrow:'Task 2 · Annotate', t2_title:'Translation & <em>sentiment</em>', t2_sub:'Item {i} of your {n} · verification pack {ann}.',
+  t2_lbl:'Wolofal translation (Ajami)', t2_prop:'Proposed sentiment:', t2_q:'Do you confirm this sentiment?', yes_conf:'✓ Yes, confirm',
+  t2_correct:'Sentiment of the Wolofal translation', t2_why:'Why?', ph_t2why:'e.g. descriptive sentence, no praise or complaint',
+  t2_ctx:'Show more context (Latin-script Wolof, Arabic source)', ctx_fr:'French', ctx_lat:'Latin Wolof', ctx_msa:'Arabic (MSA)',
   t2_common:'Common item: every annotator labels it, to measure agreement.',
   t2_guide:'<span class="sent positive">positive</span> praise, satisfaction, hope<br><span class="sent negative" style="margin-top:6px">negative</span> complaint, blame, disappointment<br><span class="sent neutral" style="margin-top:6px">neutral</span> facts, description, mixed without a clear side',
   t2_done:'🎉 You have annotated all your items. Thank you!',
@@ -62,7 +66,7 @@ Object.assign(I18N.en, {
   p_t0:'Task 0 · Verify', p_t1:'Task 1 · Augment', p_t2:'Task 2 · Annotate',
   cov_target:'Coverage of the 50 % sample', verdicts:'Verdicts', no_reasons:'Reasons for “No”', by_group:'By group', by_file:'By source file',
   g_author_passages:'Author passages', g_codeswitch:'Code-switched', g_monolingual:'Monolingual lines',
-  per_author:'Passages per author', by_source:'By source', words_total:'{n} words in total', pdf_per_author:'PDFs per author (max 20)', pdf_list:'Uploaded PDFs', pdf_total:'{n} PDFs · {s}', download:'Download',
+  per_author:'Passages per author', by_source:'By source', words_total:'{n} words in total', pdf_per_author:'PDFs per author (max 20)', tr_fixed:'Corrected by the annotator', pdf_list:'Uploaded PDFs', pdf_total:'{n} PDFs · {s}', download:'Download',
   pack_prog:'Progress per pack', changes:'Proposed → annotator (changed)', confirmed_share:'Confirmed', agreement:'Agreement',
   fleiss:'Fleiss κ on the {n} common units ({r} answers)', cohen:'Cohen κ per pair (units shared by two packs)',
   disputed:'Disputed units (agreement below 75 %)', none_yet:'No answers yet.', pair:'Pair', units:'units',
@@ -80,7 +84,11 @@ Object.assign(I18N.fr, {
   hub_auto:'Commencez par la tâche 0. Une fois terminée, les tâches 1 et 2 se débloquent en même temps. Votre statut dans le tableau du coordinateur change tout seul : <b>non terminée</b> → <b>en cours</b> après votre première réponse → <b>terminée</b> quand votre part est faite.',
   hub_t0:'Lisez des phrases du corpus wolofal natif collecté et confirmez si chacune est bien du wolofal. Sinon, dites pourquoi.',
   hub_t1:'Rassemblez des textes de votre auteur : déposez des PDF (jusqu’à 20), documentez des passages (jusqu’à 200), ou les deux.',
-  hub_t2:'Vérifiez le sentiment proposé pour chaque phrase en ajami wolofal corrigée. Confirmez-le, ou corrigez-le et dites pourquoi.',
+  hub_t2:'Pour chaque phrase : 1. vérifiez la traduction français → wolofal et corrigez-la si besoin ; 2. vérifiez que le sentiment est conservé.',
+  t2_s1:'Traduction', t2_s2:'Conservation du sentiment', t2_q1:'La traduction wolofal de la phrase française est-elle correcte ?', yes_correct:'✓ Oui, correcte', no_fix:'✕ Non, je la corrige',
+  t2_fix:'Traduction wolofal corrigée', t2_q2:'La traduction wolofal conserve-t-elle ce sentiment ?', yes_kept:'✓ Oui, conservé', proposed:'proposé',
+  t2_note:'Commentaire (facultatif)', t2_guide_tr:'<b>Traduction :</b> répondez Oui si le wolofal dit la même chose que le français et se lit naturellement. Sinon, corrigez directement le texte wolofal.',
+  err_answer_both_steps:'Répondez aux deux étapes : traduction et sentiment.', err_translation_unchanged:'Modifiez la traduction wolofal, ou répondez Oui si elle est correcte.',
   hub_t1_author:'Votre auteur : <b>{a}</b>', not_assigned_task:'Cette tâche ne vous est pas assignée.',
   open_t0:'Vérifier →', open_t1:'Contribuer →', open_t2:'Annoter →', unit_sent:'phrases', unit_pass:'passages',
   locked:'🔒 Se débloque automatiquement quand la tâche 0 est terminée ({d} / {n}). Les tâches 1 et 2 s’ouvrent en même temps.',
@@ -112,10 +120,10 @@ Object.assign(I18N.fr, {
   s_bu:'Boston University African Ajami Library', s_bu_d:'Manuscrits numérisés absents de Zenodo 20392539 (ex. Samba Diarra Mbaye, Sokhna Maïmouna Mbacké)',
   s_bk:'Livrets de xasida imprimés au Sénégal', s_bk_d:'Dakar, Touba, Tivaouane, Kaolack — transcrire / nettoyer par OCR des strophes de 50 à 150 mots',
   s_roster:'Suggéré pour votre auteur', s_other:'Autre source',
-  t2_eyebrow:'Tâche 2 · Annoter', t2_title:'Le <em>sentiment</em> est-il juste ?', t2_sub:'Élément {i} sur {n} · lot de vérification {ann}.',
-  t2_lbl:'Ajami wolofal corrigé', t2_prop:'Sentiment proposé :', t2_q:'Confirmez-vous ce sentiment ?', yes_conf:'✓ Oui, je confirme',
-  t2_correct:'Sentiment correct', t2_why:'Pourquoi ?', ph_t2why:'ex. phrase descriptive, ni éloge ni plainte',
-  t2_ctx:'Afficher le contexte (glose française, wolof latin, source arabe)', ctx_fr:'Français', ctx_lat:'Wolof latin', ctx_msa:'Arabe (MSA)',
+  t2_eyebrow:'Tâche 2 · Annoter', t2_title:'Traduction & <em>sentiment</em>', t2_sub:'Élément {i} sur {n} · lot de vérification {ann}.',
+  t2_lbl:'Traduction wolofal (ajami)', t2_prop:'Sentiment proposé :', t2_q:'Confirmez-vous ce sentiment ?', yes_conf:'✓ Oui, je confirme',
+  t2_correct:'Sentiment de la traduction wolofal', t2_why:'Pourquoi ?', ph_t2why:'ex. phrase descriptive, ni éloge ni plainte',
+  t2_ctx:'Plus de contexte (wolof en écriture latine, source arabe)', ctx_fr:'Français', ctx_lat:'Wolof latin', ctx_msa:'Arabe (MSA)',
   t2_common:'Élément commun : tous les annotateurs l’annotent, pour mesurer l’accord.',
   t2_guide:'<span class="sent positive">positif</span> éloge, satisfaction, espoir<br><span class="sent negative" style="margin-top:6px">négatif</span> plainte, reproche, déception<br><span class="sent neutral" style="margin-top:6px">neutre</span> faits, description, mitigé sans orientation claire',
   t2_done:'🎉 Vous avez annoté tous vos éléments. Merci !',
@@ -131,7 +139,7 @@ Object.assign(I18N.fr, {
   p_t0:'Tâche 0 · Vérifier', p_t1:'Tâche 1 · Enrichir', p_t2:'Tâche 2 · Annoter',
   cov_target:'Couverture de l’échantillon de 50 %', verdicts:'Verdicts', no_reasons:'Raisons des « Non »', by_group:'Par groupe', by_file:'Par fichier source',
   g_author_passages:'Passages d’auteurs', g_codeswitch:'Alternance codique', g_monolingual:'Lignes monolingues',
-  per_author:'Passages par auteur', by_source:'Par source', words_total:'{n} mots au total', pdf_per_author:'PDF par auteur (max 20)', pdf_list:'PDF déposés', pdf_total:'{n} PDF · {s}', download:'Télécharger',
+  per_author:'Passages par auteur', by_source:'Par source', words_total:'{n} mots au total', pdf_per_author:'PDF par auteur (max 20)', tr_fixed:'Corrigées par l’annotateur', pdf_list:'PDF déposés', pdf_total:'{n} PDF · {s}', download:'Télécharger',
   pack_prog:'Avancement par lot', changes:'Proposé → annotateur (modifiés)', confirmed_share:'Confirmés', agreement:'Accord',
   fleiss:'κ de Fleiss sur les {n} unités communes ({r} réponses)', cohen:'κ de Cohen par paire (unités partagées par deux lots)',
   disputed:'Unités en désaccord (accord inférieur à 75 %)', none_yet:'Pas encore de réponses.', pair:'Paire', units:'unités',
@@ -276,80 +284,101 @@ async function renderT0(){
   redraw(); window.scrollTo(0, 0);
 }
 
-/* ───────── student: T2 annotate ───────── */
+/* ───────── student: T2 annotate (1. translation, 2. sentiment) ───────── */
 async function renderT2(){
   const me = await studentShell(); if (!me) return;
   if (!(me.tasks || []).includes('T2') || !me.unlocked) { location.hash = '#/tasks'; return; }
   let items;
   try { items = await studentCall('abjad_t2_list', {}); } catch (e) { return toast(errText(e)); }
   let i = Math.max(0, items.findIndex(x => !x.answer)); if (i < 0) i = 0;
-  let draft = null;
+  let draft = null; // {translation_ok, corrected, confirmed, sentiment, reason}
+  const fresh = it => it.answer ? {...it.answer, corrected:it.answer.corrected || it.ajami} : {translation_ok:null, corrected:it.ajami, confirmed:null, sentiment:'', reason:''};
   const done = () => items.filter(x => x.answer).length;
   const go = k => { i = Math.min(items.length - 1, Math.max(0, k)); draft = null; redraw(); };
+  const keep = () => { if (!draft) return; const c = $('#t2fix'), s = $('#t2sent'), n = $('#t2note'); if (c) draft.corrected = c.value; if (s) draft.sentiment = s.value; if (n) draft.reason = n.value; };
   redraw = () => {
     if (!items.length) {
       app.innerHTML = heroWs(esc(t('t2_eyebrow')), t('t2_title'), '', studentNav('tasks')) + `<div class="wrap ws-body"><div class="empty-state">${esc(t('no_items'))}</div></div>`;
       return;
     }
-    const it = items[i], a = it.answer;
-    const d = draft || (a ? {confirmed:a.confirmed, sentiment:a.sentiment, reason:a.reason} : {});
-    const dn = done();
+    const it = items[i], d = draft || fresh(it), dn = done();
+    const yn = (step, val, yes, no) => `<div class="yn"><button type="button" class="yes ${val === true ? 'sel' : ''}" data-s="${step}" data-v="1">${esc(t(yes))}</button>
+      <button type="button" class="no ${val === false ? 'sel' : ''}" data-s="${step}" data-v="0">${esc(t(no))}</button></div>`;
     app.innerHTML = heroWs(esc(t('t2_eyebrow')), t('t2_title'), esc(t('t2_sub', {i:i + 1, n:items.length, ann:me.ann_id})), studentNav('tasks')) + `
     <div class="wrap ws-body"><div class="work">
       <div class="item">
         ${dn === items.length ? `<div class="msg ok">${esc(t('t2_done'))}</div>` : ''}
         <div class="item-meta"><code class="k">${esc(it.unit_id)}</code>${it.common ? `<span class="pill t">${esc(t('t2_common'))}</span>` : ''}</div>
+
+        <div class="step"><span class="step-n">1</span><h3>${esc(t('t2_s1'))}</h3></div>
+        <label>${esc(t('ctx_fr'))}</label>
+        <div class="fr-src" lang="fr">${esc(it.gloss_fr || '—')}</div>
         <label>${esc(t('t2_lbl'))}</label>
         <div class="ajm" lang="wo-Arab">${esc(it.ajami)}</div>
         <details class="ctx"><summary>${esc(t('t2_ctx'))}</summary><dl>
-          ${it.gloss_fr ? `<dt>${esc(t('ctx_fr'))}</dt><dd>${esc(it.gloss_fr)}</dd>` : ''}
           ${it.latin ? `<dt>${esc(t('ctx_lat'))}</dt><dd>${esc(it.latin)}</dd>` : ''}
           ${it.msa ? `<dt>${esc(t('ctx_msa'))}</dt><dd dir="rtl">${esc(it.msa)}</dd>` : ''}</dl></details>
-        <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;flex-wrap:wrap"><span class="q" style="margin:0">${esc(t('t2_prop'))}</span><span class="sent ${esc(it.sentiment)}">● ${esc(t(it.sentiment))}</span></div>
-        <div class="q">${esc(t('t2_q'))}</div>
-        <div class="yn"><button type="button" class="yes ${d.confirmed === true ? 'sel' : ''}" data-c="1">${esc(t('yes_conf'))}</button>
-          <button type="button" class="no ${d.confirmed === false ? 'sel' : ''}" data-c="0">${esc(t('no'))}</button></div>
-        <div class="why ${d.confirmed === false ? '' : 'hidden'}"><div class="grid2" style="grid-template-columns:1fr 2fr">
-          <div class="field" style="margin:0"><label for="t2sent">${esc(t('t2_correct'))}</label><select id="t2sent">
-            ${SENTS.filter(s => s !== it.sentiment).map(s => `<option value="${s}"${d.sentiment === s ? ' selected' : ''}>${esc(t(s))}</option>`).join('')}</select></div>
-          <div class="field" style="margin:0"><label for="t2why">${esc(t('t2_why'))} <span class="hint">${esc(t('required'))}</span></label><input id="t2why" value="${esc(d.reason || '')}" placeholder="${esc(t('ph_t2why'))}"></div>
-        </div></div>
+        <div class="q">${esc(t('t2_q1'))}</div>
+        ${yn(1, d.translation_ok, 'yes_correct', 'no_fix')}
+        <div class="why ${d.translation_ok === false ? '' : 'hidden'}">
+          <label for="t2fix">${esc(t('t2_fix'))} <span class="hint">${esc(t('required'))}</span></label>
+          <textarea id="t2fix" class="ajami-in" dir="rtl" lang="wo-Arab" style="min-height:110px">${esc(d.corrected)}</textarea>
+        </div>
+
+        <div class="step"><span class="step-n">2</span><h3>${esc(t('t2_s2'))}</h3></div>
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;flex-wrap:wrap"><span class="q" style="margin:0">${esc(t('t2_prop'))}</span><span class="sent ${esc(it.sentiment)}">● ${esc(t(it.sentiment))}</span></div>
+        <div class="q">${esc(t('t2_q2'))}</div>
+        ${yn(2, d.confirmed, 'yes_kept', 'no')}
+        <div class="why ${d.confirmed === false ? '' : 'hidden'}"><div class="field" style="margin:0;max-width:320px">
+          <label for="t2sent">${esc(t('t2_correct'))}</label><select id="t2sent"><option value="">—</option>
+          ${SENTS.map(s => `<option value="${s}"${s === it.sentiment ? ' disabled' : ''}${d.sentiment === s && s !== it.sentiment ? ' selected' : ''}>${esc(t(s))}${s === it.sentiment ? ' (' + esc(t('proposed')) + ')' : ''}</option>`).join('')}</select></div></div>
+        <div class="field"><label for="t2note">${esc(t('t2_note'))}</label><input id="t2note" value="${esc(d.reason || '')}"></div>
+
         <div class="nav-row"><button class="btn" type="button" data-go="prev" ${i === 0 ? 'disabled' : ''}>${esc(t('prev'))}</button>
           <span class="hint">${esc(t('saved_auto'))}</span>
-          <button class="btn primary" type="button" id="t2save">${esc(draft ? t('save_next') : t('next'))}</button></div>
+          <button class="btn primary" type="button" id="t2save">${esc(draft || !it.answer ? t('save_next') : t('next'))}</button></div>
       </div>
       <div class="side">
-        ${progressCard(dn, items.length, '', `<div class="dots">${items.map((x, k) => `<button type="button" data-k="${k}" class="${x.answer ? (x.answer.confirmed ? 'yes' : 'no') : ''} ${k === i ? 'cur' : ''}" title="${esc(x.unit_id)}"></button>`).join('')}</div>
+        ${progressCard(dn, items.length, '', `<div class="dots">${items.map((x, k) => `<button type="button" data-k="${k}" class="${x.answer ? (x.answer.translation_ok && x.answer.confirmed ? 'yes' : 'no') : ''} ${k === i ? 'cur' : ''}" title="${esc(x.unit_id)}"></button>`).join('')}</div>
           <button class="btn sm" type="button" data-go="open" style="margin-top:12px">${esc(t('next_open'))}</button>`)}
-        <div class="card"><h3>${esc(t('guidelines'))}</h3><p style="line-height:2">${t('t2_guide')}</p><p class="hint" style="margin:0">${t('keys')}</p></div>
+        <div class="card"><h3>${esc(t('guidelines'))}</h3><p>${t('t2_guide_tr')}</p><p style="line-height:2">${t('t2_guide')}</p></div>
       </div></div></div>`;
   };
-  async function save(conf){
+  async function save(){
     const it = items[i];
-    const d = draft || (it.answer ? {...it.answer} : {});
-    if (conf !== undefined) d.confirmed = conf;
-    if (d.confirmed === undefined) return go(i + 1);
-    if (d.confirmed === false) { d.sentiment = $('#t2sent').value; d.reason = ($('#t2why').value || '').trim(); if (!d.reason) { draft = d; redraw(); return toast(t('err_reason_required')); } }
-    try { await studentCall('abjad_t2_answer', {p_unit:it.unit_id, p_confirmed:d.confirmed, p_sentiment:d.confirmed ? it.sentiment : d.sentiment, p_reason:d.confirmed ? '' : d.reason}); }
-    catch (e) { return toast(errText(e)); }
-    it.answer = {confirmed:d.confirmed, sentiment:d.confirmed ? it.sentiment : d.sentiment, reason:d.confirmed ? '' : d.reason};
+    if (!draft && it.answer) return go(i + 1);
+    keep(); const d = draft || fresh(it);
+    if (d.translation_ok == null || d.confirmed == null) return toast(t('err_answer_both_steps'));
+    if (d.translation_ok === false && (!d.corrected.trim() || d.corrected.trim() === it.ajami.trim())) return toast(t('err_translation_unchanged'));
+    if (d.confirmed === false && !d.sentiment) return toast(t('err_invalid_sentiment'));
+    try {
+      await studentCall('abjad_t2_answer', {p_unit:it.unit_id, p_translation_ok:d.translation_ok, p_corrected:d.translation_ok ? '' : d.corrected,
+        p_confirmed:d.confirmed, p_sentiment:d.confirmed ? it.sentiment : d.sentiment, p_note:d.reason || ''});
+    } catch (e) { return toast(errText(e)); }
+    it.answer = {translation_ok:d.translation_ok, corrected:d.translation_ok ? '' : d.corrected, confirmed:d.confirmed,
+      sentiment:d.confirmed ? it.sentiment : d.sentiment, reason:d.reason || ''};
     const nxt = items.findIndex((x, k) => k > i && !x.answer);
     go(nxt >= 0 ? nxt : Math.min(items.length - 1, i + 1));
   }
   app.onclick = e => {
     const b = e.target.closest('button'); if (!b || !items.length) return;
-    if (b.dataset.c === '1') return save(true);
-    if (b.dataset.c === '0') { const a = items[i].answer; draft = {confirmed:false, sentiment:a && !a.confirmed ? a.sentiment : '', reason:a ? a.reason : ''}; redraw(); $('#t2why')?.focus(); return; }
+    if (b.dataset.s) {
+      keep(); draft = draft || fresh(items[i]);
+      const v = b.dataset.v === '1';
+      if (b.dataset.s === '1') draft.translation_ok = v; else draft.confirmed = v;
+      redraw();
+      if (b.dataset.s === '1' && !v) $('#t2fix')?.focus();
+      return;
+    }
     if (b.id === 't2save') return save();
     if (b.dataset.go === 'prev') return go(i - 1);
     if (b.dataset.go === 'open') { const k = items.findIndex(x => !x.answer); return go(k >= 0 ? k : i); }
     if (b.dataset.k) return go(Number(b.dataset.k));
   };
+  app.oninput = () => { if (draft) keep(); else if ($('#t2note') && document.activeElement === $('#t2note')) { draft = fresh(items[i]); keep(); } };
   keyHandler = e => {
-    if (/INPUT|TEXTAREA|SELECT/.test(document.activeElement?.tagName || '')) { if (e.key === 'Enter' && document.activeElement.tagName === 'INPUT') save(); return; }
-    if (e.key === 'y' || e.key === 'Y') save(true);
-    else if (e.key === 'n' || e.key === 'N') { draft = {confirmed:false, sentiment:'', reason:''}; redraw(); }
-    else if (e.key === 'ArrowRight') go(i + 1);
+    if (/INPUT|TEXTAREA|SELECT/.test(document.activeElement?.tagName || '')) return;
+    if (e.key === 'ArrowRight') go(i + 1);
     else if (e.key === 'ArrowLeft') go(i - 1);
   };
   redraw(); window.scrollTo(0, 0);
@@ -588,24 +617,30 @@ async function buildExport(task){
       json:{passages:rows.map(r => Object.fromEntries(header.map(h => [h, r[h]]))), pdfs:prow}};
   }
   // T2
-  const extra = ['sentiment_confirmed', 'iaa_scope', 'annotated_at'];
-  const files = raw.files.map(f => ({name:`T2_annotate/${base(f.name)}`, text:toCsv([...f.header, ...extra], (f.rows || []).map(r => ({...r.data,
+  const TR = {}; (await adminCall('abjad_admin_t2_translations', {})).forEach(x => TR[x.u + '|' + x.a] = x);
+  const tr = (r, ann) => TR[r.data.unit_id + '|' + ann];
+  const extra = ['translation_correct', 'sentiment_confirmed', 'iaa_scope', 'annotated_at'];
+  const files = raw.files.map(f => ({name:`T2_annotate/${base(f.name)}`, text:toCsv([...f.header, ...extra], (f.rows || []).map(r => { const x = tr(r, f.ann_id); return {...r.data,
     annotator_id:f.ann_id,
+    annotator_corrected_wolofal_ajami:x && x.ok === false && x.c ? x.c : r.data.annotator_corrected_wolofal_ajami,
+    translation_correct:x && x.ok === true ? 'Yes' : x && x.ok === false ? 'No' : '',
     annotator_verified_sentiment:r.sentiment || r.data.annotator_verified_sentiment,
     annotator_notes:r.sentiment ? (r.reason || '') : r.data.annotator_notes,
-    sentiment_confirmed:r.confirmed === true ? 'Yes' : r.confirmed === false ? 'No' : '', iaa_scope:r.scope, annotated_at:r.at || ''})))}));
+    sentiment_confirmed:r.confirmed === true ? 'Yes' : r.confirmed === false ? 'No' : '', iaa_scope:r.scope, annotated_at:r.at || ''}; }))}));
   const anns = [...new Set(raw.files.map(f => f.ann_id))].sort();
-  const commonHeader = ['unit_id','original_sentiment','annotator_corrected_wolofal_ajami', ...anns, 'n_answers', 'majority_sentiment', 'agreement'];
+  const commonHeader = ['unit_id','original_sentiment','annotator_corrected_wolofal_ajami', ...anns, 'n_answers', 'majority_sentiment', 'agreement', 'translation_correct_votes'];
   const commonRows = raw.common.map(c => {
     const a = c.answers || {}, ss = Object.values(a).map(x => x.sentiment), cnt = {};
     ss.forEach(s => cnt[s] = (cnt[s] || 0) + 1);
     const top = Object.entries(cnt).sort((x, y) => y[1] - x[1])[0];
     return {unit_id:c.unit_id, original_sentiment:c.data.original_sentiment, annotator_corrected_wolofal_ajami:c.data.annotator_corrected_wolofal_ajami,
-      ...Object.fromEntries(anns.map(k => [k, a[k] ? a[k].sentiment : ''])), n_answers:ss.length, majority_sentiment:top ? top[0] : '', agreement:top ? (top[1] / ss.length).toFixed(2) : ''};
+      ...Object.fromEntries(anns.map(k => [k, a[k] ? a[k].sentiment : ''])), n_answers:ss.length, majority_sentiment:top ? top[0] : '', agreement:top ? (top[1] / ss.length).toFixed(2) : '',
+      translation_correct_votes:ss.length ? `${anns.filter(k => TR[c.unit_id + '|' + k]?.ok === true).length}/${ss.length}` : ''};
   });
   files.push({name:'T2_annotate/T2_common_set_all_annotators.csv', text:toCsv(commonHeader, commonRows)});
   const json = {packs:raw.files.map(f => ({file:f.name, annotator_id:f.ann_id, rows:(f.rows || []).map(r => ({...r.data, annotator_id:f.ann_id,
-      annotation:r.sentiment ? {sentiment:r.sentiment, confirmed:r.confirmed, reason:r.reason, at:r.at} : null, iaa_scope:r.scope}))})),
+      annotation:r.sentiment ? {translation_correct:tr(r, f.ann_id)?.ok ?? null, corrected_wolofal_ajami:tr(r, f.ann_id)?.c || null,
+        sentiment:r.sentiment, sentiment_confirmed:r.confirmed, comment:r.reason, at:r.at} : null, iaa_scope:r.scope}))})),
     common_set:raw.common};
   return {files, json};
 }
@@ -648,8 +683,13 @@ async function renderAdminData(){
   if (!await adminShell()) return;
   let S;
   let PDFS = [];
-  try { [S, PDFS] = await Promise.all([adminCall('abjad_admin_task_stats', {}), adminCall('abjad_admin_t1_pdfs', {})]); } catch (e) { return toast(e.message); }
+  let TRS = [];
+  try { [S, PDFS, TRS] = await Promise.all([adminCall('abjad_admin_task_stats', {}), adminCall('abjad_admin_t1_pdfs', {}), adminCall('abjad_admin_t2_translations', {})]); } catch (e) { return toast(e.message); }
   const ag = agreementStats(S.t2.iaa);
+  const trOk = TRS.filter(x => x.ok === true).length, trFix = TRS.filter(x => x.ok === false).length;
+  const trByUnit = {}; TRS.forEach(x => (trByUnit[x.u] = trByUnit[x.u] || []).push(x.ok ? 'ok' : 'fix'));
+  const commonUnits = new Set(S.t2.iaa.filter(x => x.scope === 'all').map(x => x.u));
+  const fleissTr = fleissKappa([...commonUnits].map(u => trByUnit[u] || []));
   const pdfPer = {}; PDFS.forEach(f => pdfPer[f.ann_id] = (pdfPer[f.ann_id] || 0) + 1);
   const pdfBytes = PDFS.reduce((n, f) => n + Number(f.size_bytes), 0);
   redraw = () => {
@@ -697,6 +737,9 @@ async function renderAdminData(){
           <div class="sub-h">${esc(t('pack_prog'))}</div>
           ${t2.packs.map(p => hbar(p.ann_id, p.answered, p.assigned, '', `${p.answered}/${p.assigned}`)).join('')}
           <div class="sub-h">${esc(t('verdicts'))}</div>
+          <div class="sub-h">${esc(t('t2_s1'))}</div>
+          ${hbar(t('yes_correct').replace('✓ ', ''), trOk, t2.answered)}${hbar(t('tr_fixed'), trFix, t2.answered, 'ruby')}
+          <div class="sub-h">${esc(t('t2_s2'))}</div>
           ${hbar(t('confirmed_share'), t2.confirmed, t2.answered)}
           ${changes.map(([k, n]) => hbar(k.split('→').map(s => t(s)).join(' → '), n, t2.answered, 'ruby')).join('')}
         </div>
@@ -704,7 +747,8 @@ async function renderAdminData(){
       <div class="panel"><h3>${esc(t('agreement'))} · ${esc(t('p_t2'))}</h3>
         <div class="cols3">
           <div><div class="sub-h" style="margin-top:0">${esc(t('fleiss', {n:ag.commonUnits || S.t2.common, r:ag.commonAnswers}))}</div>
-            <div class="kappa">${fmtK(ag.fleiss)}<small>${esc(kLabel(ag.fleiss))}</small></div></div>
+            <div class="kappa">${fmtK(ag.fleiss)}<small>${esc(t('t2_s2'))} · ${esc(kLabel(ag.fleiss))}</small></div>
+            <div class="kappa" style="font-size:1.25rem;margin-top:6px">${fmtK(fleissTr)}<small>${esc(t('t2_s1'))} · ${esc(kLabel(fleissTr))}</small></div></div>
           <div><div class="sub-h" style="margin-top:0">${esc(t('cohen'))}</div>
             ${ag.pairs.length ? `<table class="disp"><tbody>${ag.pairs.map(p => `<tr><td>${esc(p.pair)}</td><td>${p.n} ${esc(t('units'))}</td><td><b>${fmtK(p.k)}</b></td></tr>`).join('')}</tbody></table>` : `<p class="hint">${esc(t('none_yet'))}</p>`}</div>
           <div><div class="sub-h" style="margin-top:0">${esc(t('disputed'))} (${ag.disputed.length})</div>
